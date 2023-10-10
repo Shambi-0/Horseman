@@ -12,6 +12,7 @@ local useMotion = TS.import(script, script, "use-motion.hook").useMotion
 local useTheme = TS.import(script, script, "use-theme.hook").useTheme
 local useNav = TS.import(script, script, "use-nav.hook").useNav
 local useRem = TS.import(script, script, "use-rem.hook").useRem
+--* @hidden 
 return {
 	useDebounce = useDebounce,
 	useInputDevice = useInputDevice,

@@ -9,4 +9,5 @@ import { useTheme } from "./use-theme.hook";
 import { useNav } from "./use-nav.hook";
 import { useRem } from "./use-rem.hook";
 
+/** @hidden */
 export { useDebounce, useInputDevice, useOnce, useJanitor, useProductInfo, useSounds, usePremium, useMotion, useTheme, useNav, useRem };
