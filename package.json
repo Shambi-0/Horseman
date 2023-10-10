@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
-    "release": "np",
+    "release": "npm run prepublishOnly && np",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\""
   },

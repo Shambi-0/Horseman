@@ -3,32 +3,25 @@ import Roact from "@rbxts/roact";
 import { pAnchor, pPoint, pSize } from "@rbxts/precomputed";
 import { useEffect, withHooks } from "@rbxts/roact-hooked";
 import { useToggle } from "@rbxts/roact-hooked-plus";
-import { useTimer } from "@rbxts/pretty-roact-hooks";
+import { getBindingValue, useTimer } from "@rbxts/pretty-roact-hooks";
 import ColorUtils from "@rbxts/colour-utils";
-
-import { AspectRatio } from "../../Constraints/AspectRatio";
-import { Gradient } from "../../Constraints/Gradient";
-import { Corner } from "../../Constraints/Corner";
-
-import { Capture } from "../../Capture";
-import { Frame } from "../../Frame";
-import { Image } from "../../Image";
-
-import { useMotion } from "Client/Interfaces/Utility/Hooks/use-motion.hook";
-import { useSounds } from "Client/Interfaces/Utility/Hooks/use-sounds.hook";
-import { useTheme } from "Client/Interfaces/Utility/Hooks/use-theme.hook";
-
-import getSpringConfig from "Client/Interfaces/Utility/getSpringConfig";
-import getSounds from "Client/Interfaces/Utility/getSounds";
+import { useSounds } from "../../../../Utility/Hooks/use-sounds.hook";
+import getSounds from "../../../../Utility/getSounds";
+import useMotion from "../../../../Utility/Hooks/use-motion.hook";
+import useTheme from "../../../../Utility/Hooks/use-theme.hook";
+import Ripple from "@rbxts/ripple";
+import { Frame } from "../../../Core/Components/Frame";
+import { AspectRatio } from "../../../Core/Constraints/AspectRatio";
+import { Corner } from "../../../Core/Constraints/Corner";
+import { Capture } from "../../../Core/Components/Capture";
+import { Gradient } from "../../../Core/Constraints/Gradient";
+import { Image } from "../../../Core/Components/Image";
 
 interface Properties {
-    Radius: UDim,
-    Frequency: number,
-    Dampening: number,
-    
     Callback: (Bool: boolean) => void,
+    Spring: Ripple.SpringOptions,
     Cooldown: number,
-    
+    Radius: UDim,
     Icon: string,
     From: string,
     To: string
@@ -54,28 +47,28 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
     useEffect(() => {
         const Goal = Toggled ? 1 : 0;
         
-        ProgressMotion.spring(Goal, getSpringConfig(Properties));
+        ProgressMotion.spring(Goal, getBindingValue(Properties.Spring));
         SnapMotion.spring(Goal, { "frequency": 6, "damping": 1 });
         IconMotion.spring(Goal, { "frequency": 2.5, "damping": 0.9 });
     }, [ Toggled ]);
 
     return (
         <Frame
-            Size={Properties.Size}
-            Position={Properties.Position}
             AnchorPoint={Properties.AnchorPoint}
+            Position={Properties.Position}
             BackgroundTransparency={1}
+            Size={Properties.Size}
         >
             <uisizeconstraint
-                Key="Sizing"
                 MinSize={new Vector2(0, 32)}
+                Key="Sizing"
             />
             <AspectRatio Ratio={1} />
             <Frame
                 Key="Container"
                 AnchorPoint={pAnchor.Center.Center}
                 Position={pPoint.Center.Center}
-                Size={Hovering.map(Value => pSize.Full.add(pSize.None.Lerp(UDim2.fromScale(0.2, 0.2), Value)))}
+                Size={Hovering.map((Value: number) => pSize.Full.add(pSize.None.Lerp(UDim2.fromScale(0.2, 0.2), Value)))}
                 BackgroundColor3={
                     Lifetime.value.map(() => {
                         const Background = ColorUtils.Blend.Transparency(Theme.Primary.Primary400!, Theme.Default.Default100!, Snap.getValue());
@@ -87,15 +80,15 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
                 <Corner Radius={Properties.Radius} />
                 <Capture
                     Cooldown={Properties.Cooldown}
-                    onHovering={Hovering => HoveringMotion.spring(Hovering ? 1 : 0, getSpringConfig(Properties))}
+                    onHovering={(Hovering: any) => HoveringMotion.spring(Hovering ? 1 : 0, getBindingValue(Properties.Spring))}
                     onInputBegan={
-                        (_, Input: InputObject, Outside: boolean) => {
+                        (_: any, Input: InputObject, Outside: boolean) => {
                             if ((Input.UserInputType === Enum.UserInputType.MouseButton1) && !Outside) {
                                 // Player(Toggled ? "GenericNotification5" : "GenericNotification8");
                                 Player(Toggled ? "ClickyButton1a" : "ClickyButton1b")
 
                                 Toggle();
-                                HoveringMotion.spring(1, getSpringConfig(Properties));
+                                HoveringMotion.spring(1, getBindingValue(Properties.Spring));
 
                                 if (Properties.Callback) task.defer(Properties.Callback, Toggled);
                             };
@@ -103,16 +96,16 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
                     }
                 />
                 <Image
-                    Key="Icon"
-                    Size={Progress.map(Value => UDim2.fromScale(0.7, 0.7).add(UDim2.fromScale(0.2, 0.2).Lerp(pSize.None, Value)))}
-                    AnchorPoint={pAnchor.Center.Center}
-                    ImageColor3={Theme.Layout.Foreground}
-                    Position={pPoint.Center.Center}
+                    Size={Progress.map((Value: number) => UDim2.fromScale(0.7, 0.7).add(UDim2.fromScale(0.2, 0.2).Lerp(pSize.None, Value)))}
                     Image={Properties.From ? Properties.From : Properties.Icon}
+                    ImageColor3={Theme.Layout.Foreground}
+                    AnchorPoint={pAnchor.Center.Center}
+                    Position={pPoint.Center.Center}
+                    Key="Icon"
                 >
                     <Gradient
                         Transparency={
-                            Icon.map(Value => {
+                            Icon.map((Value: number) => {
                                 const T = math.clamp(Value, 0.01, 0.98);
 
                                 return new NumberSequence([
@@ -127,16 +120,16 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
                 </Image>
                 {
                     Properties.To ? <Image
-                        Key="Hidden"
-                        Size={Progress.map(Value => UDim2.fromScale(0.7, 0.7).add(UDim2.fromScale(0.2, 0.2).Lerp(pSize.None, 1 - Value)))}
-                        AnchorPoint={pAnchor.Center.Center}
+                        Size={Progress.map((Value: number) => UDim2.fromScale(0.7, 0.7).add(UDim2.fromScale(0.2, 0.2).Lerp(pSize.None, 1 - Value)))}
                         ImageColor3={Theme.Primary.Primary400!}
+                        AnchorPoint={pAnchor.Center.Center}
                         Position={pPoint.Center.Center}
                         Image={Properties.To}
+                        Key="Hidden"
                     >
                         <Gradient
                             Transparency={
-                                Icon.map(Value => {
+                                Icon.map((Value: number) => {
                                     const T = math.clamp(Value, 0.02, 0.99);
 
                                     return new NumberSequence([
@@ -155,11 +148,13 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
     );
 }, {
     "defaultProps": {
+        Icon: "http://www.roblox.com/asset/?id=6031094667",
         Radius: new UDim(0.15),
         Callback: () => {},
-        Frequency: 6,
-        Dampening: 0.6,
         Cooldown: 0.15,
-        Icon: "http://www.roblox.com/asset/?id=6031094667"
+        Spring: {
+            "damping": 0.6,
+            "frequency": 6
+        }
     }
 });
