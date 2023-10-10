@@ -17,9 +17,10 @@ local RunService = _services.RunService
 local UserInputService = _services.UserInputService
 local useToggle = TS.import(script, TS.getModule(script, "@rbxts", "roact-hooked-plus").out).useToggle
 local pAnchor = TS.import(script, TS.getModule(script, "@rbxts", "precomputed").out).pAnchor
-local useMotion = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks", "use-motion.hook").default
-local useTheme = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks", "use-theme.hook").default
-local useRem = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks", "use-rem.hook").default
+local _Hooks = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks")
+local useMotion = _Hooks.useMotion
+local useRem = _Hooks.useRem
+local useTheme = _Hooks.useTheme
 local Progress = TS.import(script, script.Parent.Parent, "Display", "Progress").Progress
 local Capture = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Capture").Capture
 local Frame = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Frame").Frame
@@ -173,7 +174,7 @@ local Slider = withHooks(function(Properties)
 		Roact.createElement(Frame, {
 			[Roact.Ref] = InnerReference,
 			Position = State:map(function(Value)
-				local Width = getBindingValue(Properties.Width)
+				-- const Width = getBindingValue(Properties.Width!);
 				return UDim2.fromScale(Value, 0.5)
 			end),
 			AnchorPoint = pAnchor.Center.Center,

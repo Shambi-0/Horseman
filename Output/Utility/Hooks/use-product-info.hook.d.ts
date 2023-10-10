@@ -6,5 +6,5 @@ interface Information {
     Identity: number;
     Name: string;
 }
-export default function useProductInfo(ProductId: number): Information;
+export declare function useProductInfo(ProductId: number): Information;
 export {};

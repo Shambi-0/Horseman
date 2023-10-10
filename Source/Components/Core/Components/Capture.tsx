@@ -4,9 +4,9 @@ import { RunService, UserInputService } from "@rbxts/services";
 import { useEventListener } from "@rbxts/pretty-roact-hooks";
 import { withHooks } from "@rbxts/roact-hooked";
 
-import { Group } from "./Group";
+import { useDebounce } from "../../../Utility/Hooks";
 
-import useDebounce from "../../../Utility/Hooks/use-debounce.hook";
+import { Group } from "./Group";
 
 export const IS_EDIT = RunService.IsStudio() && !RunService.IsRunning();
 

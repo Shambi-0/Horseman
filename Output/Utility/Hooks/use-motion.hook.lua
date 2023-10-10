@@ -18,8 +18,6 @@ local function useMotion(goal)
 	end)
 	return binding, motion
 end
-local default = useMotion
 return {
 	useMotion = useMotion,
-	default = default,
 }

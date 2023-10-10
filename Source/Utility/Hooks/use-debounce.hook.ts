@@ -1,7 +1,7 @@
 import { BindingOrValue, getBindingValue } from "@rbxts/pretty-roact-hooks";
 import { useBinding } from "@rbxts/roact-hooked";
 
-export default function useDebounce(Delay: BindingOrValue<number>) {
+export function useDebounce(Delay: BindingOrValue<number>) {
     const [ Last, Update ] = useBinding(0);
 
     const Can = (Now: number = os.clock()): boolean => {

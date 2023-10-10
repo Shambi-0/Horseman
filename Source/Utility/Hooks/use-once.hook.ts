@@ -8,5 +8,3 @@ export function useJanitor<Output, Cached extends void | object = void>(Callback
 
     useOnce(() => { Callback(Janitor); return () => Janitor.Destroy(); });
 };
-
-export default useOnce;

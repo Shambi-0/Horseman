@@ -41,5 +41,5 @@ local function useProductInfo(ProductId)
 	return Info
 end
 return {
-	default = useProductInfo,
+	useProductInfo = useProductInfo,
 }

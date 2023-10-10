@@ -1,4 +1,4 @@
-export default function useTheme(): {
+export declare function useTheme(): {
     Layout: {
         Background: Color3;
         Foreground: Color3 | undefined;

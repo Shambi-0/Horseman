@@ -11,5 +11,5 @@ local function useNav(Key)
 	return _condition
 end
 return {
-	default = useNav,
+	useNav = useNav,
 }

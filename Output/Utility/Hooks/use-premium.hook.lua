@@ -13,5 +13,5 @@ local function usePremium()
 	return IsPremium
 end
 return {
-	default = usePremium,
+	usePremium = usePremium,
 }

@@ -16,9 +16,7 @@ local function useJanitor(Callback)
 		end
 	end)
 end
-local default = useOnce
 return {
 	useJanitor = useJanitor,
 	useOnce = useOnce,
-	default = default,
 }

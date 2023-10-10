@@ -1,13 +1,11 @@
 import Roact from "@rbxts/roact";
-import Ripple from "@rbxts/ripple";
 
 import { getBindingValue, joinAnyBindings, toBinding, useBindingListener } from "@rbxts/pretty-roact-hooks";
 import { pAnchor, pPoint } from "@rbxts/precomputed";
 import { withHooks } from "@rbxts/roact-hooked";
+import Ripple from "@rbxts/ripple";
 
-import { useMotion } from "../../../Utility/Hooks/use-motion.hook";
-import useTheme from "../../../Utility/Hooks/use-theme.hook";
-import useRem from "../../../Utility/Hooks/use-rem.hook";
+import { useMotion, useRem, useTheme } from "../../../Utility/Hooks";
 
 import { CanvasGroup } from "../../Core/Components/CanvasGroup";
 import { Frame } from "../../Core/Components/Frame";
@@ -58,7 +56,7 @@ export const Progress = withHooks<Bindable<Properties, Frame>>(Properties => {
                 <Frame
                     Key="Foreground"
                     BackgroundColor3={Properties.ForegroundColor3 || Theme.Primary.Primary400}
-                    Size={State.map(Value => {
+                    Size={State.map((Value: number) => {
                         return UDim2.fromScale(math.clamp(Value, 0, 1), 1)
                     })}
                 >

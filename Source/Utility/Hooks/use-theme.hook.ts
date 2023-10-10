@@ -2,6 +2,6 @@ import { useContext } from "@rbxts/roact-hooked";
 
 import { ThemeContext } from "../../Contexts/Theme.context";
 
-export default function useTheme() {
+export function useTheme() {
     return useContext(ThemeContext);
 };

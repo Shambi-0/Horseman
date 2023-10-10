@@ -6,5 +6,5 @@ local function useTheme()
 	return useContext(ThemeContext)
 end
 return {
-	default = useTheme,
+	useTheme = useTheme,
 }

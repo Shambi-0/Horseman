@@ -19,7 +19,7 @@ const Default: Information = {
     Name: "..."
 };
 
-export default function useProductInfo(ProductId: number): Information {
+export function useProductInfo(ProductId: number): Information {
     const [ Info = Default ] = useAsync(() => {
         return Promise.retryWithDelay(async () => {
             const Details = MarketplaceService.GetProductInfo(ProductId, Enum.InfoType.Product);

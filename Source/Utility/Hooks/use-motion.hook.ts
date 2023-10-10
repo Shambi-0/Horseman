@@ -22,5 +22,3 @@ export function useMotion<T extends Ripple.MotionGoal>(goal: T) {
 
 	return $tuple(binding, motion);
 };
-
-export default useMotion;

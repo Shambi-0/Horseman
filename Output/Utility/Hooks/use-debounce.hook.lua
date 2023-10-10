@@ -24,5 +24,5 @@ local function useDebounce(Delay)
 	return Can, Try
 end
 return {
-	default = useDebounce,
+	useDebounce = useDebounce,
 }

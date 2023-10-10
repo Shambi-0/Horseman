@@ -1,1 +1,1 @@
-export default function usePremium(): boolean;
+export declare function usePremium(): boolean;

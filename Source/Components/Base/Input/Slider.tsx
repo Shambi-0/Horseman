@@ -6,9 +6,7 @@ import { RunService, UserInputService } from "@rbxts/services";
 import { useToggle } from "@rbxts/roact-hooked-plus";
 import { pAnchor } from "@rbxts/precomputed";
 
-import useMotion from "../../../Utility/Hooks/use-motion.hook";
-import useTheme from "../../../Utility/Hooks/use-theme.hook";
-import useRem from "../../../Utility/Hooks/use-rem.hook";
+import { useMotion, useRem, useTheme } from "../../../Utility/Hooks";
 
 import { Progress } from "../Display/Progress";
 
@@ -92,9 +90,9 @@ export const Slider = withHooks<Bindable<Properties, Frame>>(Properties => {
                         ZIndex={2}
                         AnchorPoint={pAnchor.Center.Center}
                         Position={UDim2.fromScale(Scale, 0.5)}
-                        BackgroundColor3={State.map(Value => ((Value > Scale) ? (getBindingValue(Properties.ForegroundColor3!) || Theme.Primary.Primary500!) : Theme.Default.Default600!))}
-                        BackgroundTransparency={State.map(Value => ((Value > Scale) ? 0 : 0.75))}
-                        Size={State.map(Value => ((Value > Scale) ? UDim2.fromOffset(Size, Size) : (new UDim2(0, math.clamp(Rem(0.15), 2, 4), 0, Height))))}
+                        BackgroundColor3={State.map((Value: number) => ((Value > Scale) ? (getBindingValue(Properties.ForegroundColor3!) || Theme.Primary.Primary500!) : Theme.Default.Default600!))}
+                        BackgroundTransparency={State.map((Value: number) => ((Value > Scale) ? 0 : 0.75))}
+                        Size={State.map((Value: number) => ((Value > Scale) ? UDim2.fromOffset(Size, Size) : (new UDim2(0, math.clamp(Rem(0.15), 2, 4), 0, Height))))}
                     >
                         <Corner Radius={Properties.Radius} />
                     </Frame>
@@ -153,8 +151,8 @@ export const Slider = withHooks<Bindable<Properties, Frame>>(Properties => {
         >
             <Frame
                 Ref={InnerReference}
-                Position={State.map(Value => {
-                    const Width = getBindingValue(Properties.Width!);
+                Position={State.map((Value: number | undefined) => {
+                    // const Width = getBindingValue(Properties.Width!);
 
                     return UDim2.fromScale(Value, 0.5)
                 })}

@@ -1,5 +1,1 @@
-import * as Hooks from "./Utility/Hooks";
-
-export default {
-	... Hooks
-};
+export * from "./Utility/Hooks";

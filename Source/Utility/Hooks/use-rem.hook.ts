@@ -39,7 +39,7 @@ function useRemContext({ Minimum = 0, Maximum = math.huge }: RemOptions = {}) {
 	return math.clamp(Rem, Minimum, Maximum);
 };
 
-export default function useRem(options?: RemOptions) {
+export function useRem(options?: RemOptions) {
 	const Rem = useRemContext(options);
 
 	const RemFunction = <T extends number | Vector2 | UDim | UDim2>(Value: T, Mode: RemScaleMode = "Unit"): T => {

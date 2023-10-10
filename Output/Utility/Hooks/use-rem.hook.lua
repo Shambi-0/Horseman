@@ -53,5 +53,5 @@ local function useRem(options)
 	return useCallback(RemFunction, { Rem })
 end
 return {
-	default = useRem,
+	useRem = useRem,
 }

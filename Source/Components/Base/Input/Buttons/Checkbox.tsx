@@ -1,21 +1,22 @@
 import Roact from "@rbxts/roact";
 
+import { getBindingValue, useTimer } from "@rbxts/pretty-roact-hooks";
 import { pAnchor, pPoint, pSize } from "@rbxts/precomputed";
 import { useEffect, withHooks } from "@rbxts/roact-hooked";
 import { useToggle } from "@rbxts/roact-hooked-plus";
-import { getBindingValue, useTimer } from "@rbxts/pretty-roact-hooks";
 import ColorUtils from "@rbxts/colour-utils";
-import { useSounds } from "../../../../Utility/Hooks/use-sounds.hook";
-import getSounds from "../../../../Utility/getSounds";
-import useMotion from "../../../../Utility/Hooks/use-motion.hook";
-import useTheme from "../../../../Utility/Hooks/use-theme.hook";
 import Ripple from "@rbxts/ripple";
-import { Frame } from "../../../Core/Components/Frame";
-import { AspectRatio } from "../../../Core/Constraints/AspectRatio";
-import { Corner } from "../../../Core/Constraints/Corner";
+
+import { useMotion, useSounds, useTheme } from "../../../../Utility/Hooks";
+import getSounds from "../../../../Utility/getSounds";
+
 import { Capture } from "../../../Core/Components/Capture";
-import { Gradient } from "../../../Core/Constraints/Gradient";
+import { Frame } from "../../../Core/Components/Frame";
 import { Image } from "../../../Core/Components/Image";
+
+import { AspectRatio } from "../../../Core/Constraints/AspectRatio";
+import { Gradient } from "../../../Core/Constraints/Gradient";
+import { Corner } from "../../../Core/Constraints/Corner";
 
 interface Properties {
     Callback: (Bool: boolean) => void,

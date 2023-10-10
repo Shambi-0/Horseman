@@ -3,7 +3,7 @@ import Roact from "@rbxts/roact";
 import { useEffect, useState, withHooks } from "@rbxts/roact-hooked";
 import { pColor } from "@rbxts/precomputed";
 
-import useRem from "../../../Utility/Hooks/use-rem.hook";
+import { useRem } from "../../../Utility/Hooks";
 
 import { Image } from "../../Core/Components/Image";
 import { Frame } from "../../Core/Components/Frame";

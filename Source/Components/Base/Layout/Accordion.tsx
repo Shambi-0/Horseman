@@ -8,14 +8,11 @@ import { RunService } from "@rbxts/services";
 
 import getSounds from "../../../Utility/getSounds";
 
-import { useSounds } from "../../../Utility/Hooks/use-sounds.hook";
-import useMotion from "../../../Utility/Hooks/use-motion.hook";
-import useRem from "../../../Utility/Hooks/use-rem.hook";
-
 import { Capture } from "../../Core/Components/Capture";
 import { Frame } from "../../Core/Components/Frame";
 import { Image } from "../../Core/Components/Image";
 import { Text } from "../../Core/Components/Text";
+import { useMotion, useRem, useSounds } from "../../../Utility/Hooks";
 
 const GroupContext = Roact.createContext({
 	Register: identity<((H: Roact.Binding<number>) => number) | undefined>(undefined),
@@ -123,7 +120,7 @@ namespace Accordion {
 		return (
 			<ContentContext.Provider value={Source}>
 				<Frame
-					Size={Height.map((Value) => new UDim2(1, 0, 0, Value))}
+					Size={Height.map((Value: number) => new UDim2(1, 0, 0, Value))}
 					BackgroundTransparency={1}
 					ClipsDescendants
 				>
@@ -223,7 +220,7 @@ namespace Accordion {
 					<Image
 						Image="http://www.roblox.com/asset/?id=6031094670"
 						SizeConstraint={Enum.SizeConstraint.RelativeYY}
-						Rotation={Rotation.map((Value) => Value * -90)}
+						Rotation={Rotation.map((Value: number) => Value * -90)}
 						AnchorPoint={pAnchor.Right.Center}
 						Size={UDim2.fromScale(0.6, 0.6)}
 						Position={pPoint.Right.Center}

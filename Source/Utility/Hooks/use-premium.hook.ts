@@ -2,7 +2,7 @@ import { useEventListener } from "@rbxts/pretty-roact-hooks";
 import { useState } from "@rbxts/roact-hooked";
 import { Players } from "@rbxts/services";
 
-export default function usePremium() {
+export function usePremium() {
     const [ IsPremium, SetIsPremium ] = useState(Players.LocalPlayer.MembershipType === Enum.MembershipType.Premium);
 
     useEventListener(Players.PlayerMembershipChanged, Player => {
