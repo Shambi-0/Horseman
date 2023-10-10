@@ -1,0 +1,51 @@
+{
+	"compilerOptions": {
+		// required
+		"allowSyntheticDefaultImports": true,
+		"downlevelIteration": true,
+		"jsx": "react",
+		"jsxFactory": "Roact.createElement",
+		"jsxFragmentFactory": "Roact.createFragment",
+		"module": "commonjs",
+		"moduleResolution": "Node",
+		"noLib": true,
+		"resolveJsonModule": true,
+		"experimentalDecorators": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleDetection": "force",
+		"strict": true,
+		"target": "ESNext",
+		"typeRoots": [
+			"node_modules/@rbxts"
+		],
+
+		// configurable
+		"rootDir": "Source",
+		"outDir": "Output",
+		"incremental": true,
+		"tsBuildInfoFile": "Output/tsconfig.tsbuildinfo",
+		"declaration": true,
+
+		"plugins": [
+			{
+                "transform": "rbxts-transform-guid",
+                "EXPERIMENTAL_JSDocConstEnumUUID": true
+            },
+			{
+				"transform": "rbxts-transformer-services"
+			},
+			{
+                "transform": "rbxts-transform-env"
+            },
+			{
+                "transform": "rbxts-transformer-t"
+            },
+			{
+                "transform": "rbxts-transformer-switchcase"
+            },
+			{
+				"transform": "rbxts-transformer-setget"
+			}
+		]
+	}
+}
