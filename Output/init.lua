@@ -1,7 +1,11 @@
 -- Compiled with roblox-ts v2.2.0
 local TS = _G[script]
-local exports = {}
-for _k, _v in TS.import(script, script, "Utility", "Hooks") or {} do
-	exports[_k] = _v
+local Hooks = TS.import(script, script, "Utility", "Hooks")
+local _object = {}
+for _k, _v in Hooks do
+	_object[_k] = _v
 end
-return exports
+local default = _object
+return {
+	default = default,
+}
