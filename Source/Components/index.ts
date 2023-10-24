@@ -29,9 +29,11 @@ import { Checkbox } from "./Base/Input/Buttons/Checkbox";
 import { Switch } from "./Base/Input/Buttons/Switch";
 import { Progress } from "./Base/Display/Progress";
 import { Rating } from "./Base/Display/Rating";
+import { Line } from "./Base/Decoration/Line";
 import { Slider } from "./Base/Input/Slider";
+import { Dot } from "./Base/Decoration/Dot";
 
 import Accordion from "./Base/Layout/Accordion";
 
 /** @hidden */
-export { LoadingSpinner, MeasureFrame, DropShadow, NumberSpinner, Checkbox, Switch, Progress, Rating, Slider, Accordion };
+export { LoadingSpinner, MeasureFrame, DropShadow, NumberSpinner, Checkbox, Switch, Progress, Rating, Line, Slider, Dot, Accordion };

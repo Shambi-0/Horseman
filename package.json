@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "@rbxts/colour-utils": "^1.4.1",
+    "@rbxts/geom": "^1.0.2",
     "@rbxts/janitor": "^1.15.4-ts.0",
     "@rbxts/precomputed": "^1.0.2",
     "@rbxts/pretty-roact-hooks": "^3.2.0",
