@@ -8,7 +8,7 @@ import ColorUtils from "@rbxts/colour-utils";
 import Ripple from "@rbxts/ripple";
 
 import { useMotion, useSounds, useTheme } from "../../../../Utility/Hooks";
-import getSounds from "../../../../Utility/getSounds";
+// import getSounds from "../../../../Utility/getSounds";
 
 import { Capture } from "../../../Core/Components/Capture";
 import { Frame } from "../../../Core/Components/Frame";
@@ -31,10 +31,12 @@ interface Properties {
 export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Properties => {
     const Lifetime = useTimer();
 
+    /*
     const Player = useSounds({
         ... getSounds("Alerts"),
         ... getSounds("Buttons")
     });
+    */
 
     const [ Toggled, Toggle ] = useToggle(false, [ false, true ]);
 
@@ -84,8 +86,7 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
                     onInputBegan={
                         (_: any, Input: InputObject, Outside: boolean) => {
                             if ((Input.UserInputType === Enum.UserInputType.MouseButton1) && !Outside) {
-                                // Player(Toggled ? "GenericNotification5" : "GenericNotification8");
-                                Player(Toggled ? "ClickyButton1a" : "ClickyButton1b")
+                                // Player(Toggled ? "ClickyButton1a" : "ClickyButton1b")
 
                                 Toggle();
                                 HoveringMotion.spring(1, getBindingValue(Properties.Spring));

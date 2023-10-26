@@ -7,7 +7,7 @@ import { useToggle } from "@rbxts/roact-hooked-plus";
 import { RunService } from "@rbxts/services";
 
 import { useMotion, useRem, useSounds } from "../../../Utility/Hooks";
-import getSounds from "../../../Utility/getSounds";
+// import getSounds from "../../../Utility/getSounds";
 
 import { Capture } from "../../Core/Components/Capture";
 import { Frame } from "../../Core/Components/Frame";
@@ -177,7 +177,7 @@ namespace Accordion {
 	interface TriggerProperties {}
 
 	export const Trigger = withHooks<Bindable<TriggerProperties, Frame>>((Properties) => {
-		const Player = useSounds({ ... getSounds("Buttons"), ... getSounds("Slide") });
+		// const Player = useSounds({ ... getSounds("Buttons"), ... getSounds("Slide") });
 
 		const ContentSource = useContext(ContentContext);
 
@@ -208,7 +208,7 @@ namespace Accordion {
 							(Input.UserInputType === Enum.UserInputType.MouseButton1 ||
 							Input.UserInputType === Enum.UserInputType.Touch) && !Outside
 						) {
-							Player(Toggled ? "Minimize1" : "LittleSwoosh1b", 0.2);
+							// Player(Toggled ? "Minimize1" : "LittleSwoosh1b", 0.2);
 							Toggle();
 						};
 					}}

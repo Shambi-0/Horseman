@@ -20,8 +20,7 @@ local RunService = TS.import(script, TS.getModule(script, "@rbxts", "services"))
 local _Hooks = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks")
 local useMotion = _Hooks.useMotion
 local useRem = _Hooks.useRem
-local useSounds = _Hooks.useSounds
-local getSounds = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "getSounds").default
+-- import getSounds from "../../../Utility/getSounds";
 local Capture = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Capture").Capture
 local Frame = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Frame").Frame
 local Image = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Image").Image
@@ -225,14 +224,7 @@ do
 	end)
 	_container.Content = Content
 	local Trigger = withHooks(function(Properties)
-		local _object = {}
-		for _k, _v in getSounds("Buttons") do
-			_object[_k] = _v
-		end
-		for _k, _v in getSounds("Slide") do
-			_object[_k] = _v
-		end
-		local Player = useSounds(_object)
+		-- const Player = useSounds({ ... getSounds("Buttons"), ... getSounds("Slide") });
 		local ContentSource = useContext(ContentContext)
 		local Toggled, Toggle = useToggle(false, { false, true })
 		local Rotation, RotationMotion = useMotion(0)
@@ -255,7 +247,7 @@ do
 				Cooldown = 0.35,
 				onInputBegan = function(_, Input, Outside)
 					if (Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch) and not Outside then
-						Player(if Toggled then "Minimize1" else "LittleSwoosh1b", 0.2)
+						-- Player(Toggled ? "Minimize1" : "LittleSwoosh1b", 0.2);
 						Toggle()
 					end
 				end,

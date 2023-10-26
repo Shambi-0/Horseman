@@ -15,9 +15,8 @@ local useToggle = TS.import(script, TS.getModule(script, "@rbxts", "roact-hooked
 local ColorUtils = TS.import(script, TS.getModule(script, "@rbxts", "ColourUtils"))
 local _Hooks = TS.import(script, script.Parent.Parent.Parent.Parent.Parent, "Utility", "Hooks")
 local useMotion = _Hooks.useMotion
-local useSounds = _Hooks.useSounds
 local useTheme = _Hooks.useTheme
-local getSounds = TS.import(script, script.Parent.Parent.Parent.Parent.Parent, "Utility", "getSounds").default
+-- import getSounds from "../../../../Utility/getSounds";
 local Capture = TS.import(script, script.Parent.Parent.Parent.Parent, "Core", "Components", "Capture").Capture
 local Frame = TS.import(script, script.Parent.Parent.Parent.Parent, "Core", "Components", "Frame").Frame
 local Image = TS.import(script, script.Parent.Parent.Parent.Parent, "Core", "Components", "Image").Image
@@ -26,14 +25,14 @@ local Gradient = TS.import(script, script.Parent.Parent.Parent.Parent, "Core", "
 local Corner = TS.import(script, script.Parent.Parent.Parent.Parent, "Core", "Constraints", "Corner").Corner
 local Checkbox = withHooks(function(Properties)
 	local Lifetime = useTimer()
-	local _object = {}
-	for _k, _v in getSounds("Alerts") do
-		_object[_k] = _v
-	end
-	for _k, _v in getSounds("Buttons") do
-		_object[_k] = _v
-	end
-	local Player = useSounds(_object)
+	--[[
+		
+		    const Player = useSounds({
+		        ... getSounds("Alerts"),
+		        ... getSounds("Buttons")
+		    });
+		    
+	]]
 	local Toggled, Toggle = useToggle(false, { false, true })
 	local Snap, SnapMotion = useMotion(0)
 	local Icon, IconMotion = useMotion(0)
@@ -90,8 +89,7 @@ local Checkbox = withHooks(function(Properties)
 			end,
 			onInputBegan = function(_, Input, Outside)
 				if (Input.UserInputType == Enum.UserInputType.MouseButton1) and not Outside then
-					-- Player(Toggled ? "GenericNotification5" : "GenericNotification8");
-					Player(if Toggled then "ClickyButton1a" else "ClickyButton1b")
+					-- Player(Toggled ? "ClickyButton1a" : "ClickyButton1b")
 					Toggle()
 					HoveringMotion:spring(1, getBindingValue(Properties.Spring))
 					if Properties.Callback then

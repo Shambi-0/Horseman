@@ -1,20 +1,20 @@
 import Roact from "@rbxts/roact";
+import Ripple from "@rbxts/ripple";
 
+import { getBindingValue, useTimer } from "@rbxts/pretty-roact-hooks";
 import { pAnchor, pPoint, pSize } from "@rbxts/precomputed";
 import { useEffect, withHooks } from "@rbxts/roact-hooked";
 import { useToggle } from "@rbxts/roact-hooked-plus";
-import { getBindingValue, useTimer } from "@rbxts/pretty-roact-hooks";
 import ColorUtils from "@rbxts/colour-utils";
 
-import { useSounds } from "../../../../Utility/Hooks/use-sounds.hook";
+import { useMotion, useTheme, useSounds } from "../../../../Utility/Hooks";
+//import getSounds from "../../../../Utility/getSounds";
 
-import getSounds from "../../../../Utility/getSounds";
-import { useMotion, useTheme } from "../../../../Utility/Hooks";
-import Ripple from "@rbxts/ripple";
+import { Capture } from "../../../Core/Components/Capture";
 import { Frame } from "../../../Core/Components/Frame";
+
 import { AspectRatio } from "../../../Core/Constraints/AspectRatio";
 import { Corner } from "../../../Core/Constraints/Corner";
-import { Capture } from "../../../Core/Components/Capture";
 
 interface Properties {
     Callback: (Bool: boolean) => void,
@@ -29,10 +29,12 @@ interface Properties {
 export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Properties => {
     const Lifetime = useTimer();
 
+    /*
     const Player = useSounds({
         ... getSounds("Alerts"),
         ... getSounds("Buttons")
     });
+    */
 
     const [ Toggled, Toggle ] = useToggle(false, [ false, true ]);
 
@@ -82,7 +84,7 @@ export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Propert
                     onInputBegan={
                         (_, Input: InputObject, Outside: boolean) => {
                             if ((Input.UserInputType === Enum.UserInputType.MouseButton1) && !Outside) {
-                                Player(Toggled ? "ClickyButton1a" : "ClickyButton1b");
+                                // Player(Toggled ? "ClickyButton1a" : "ClickyButton1b");
 
                                 Toggle();
                                 HoveringMotion.spring(1, getBindingValue(Properties.Spring));
