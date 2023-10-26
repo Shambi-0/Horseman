@@ -93,18 +93,18 @@ local Slider = withHooks(function(Properties)
 					local Size = Height * 1.25
 					local _arg0 = Roact.createFragment({
 						["m" .. tostring(Index)] = Roact.createElement(Frame, {
-							ZIndex = 2,
-							AnchorPoint = pAnchor.Center.Center,
-							Position = UDim2.fromScale(Scale, 0.5),
 							BackgroundColor3 = State:map(function(Value)
 								return if (Value > Scale) then (getBindingValue(Properties.ForegroundColor3) or Theme.Primary.Primary500) else Theme.Default.Default600
-							end),
-							BackgroundTransparency = State:map(function(Value)
-								return if (Value > Scale) then 0 else 0.75
 							end),
 							Size = State:map(function(Value)
 								return if (Value > Scale) then UDim2.fromOffset(Size, Size) else (UDim2.new(0, math.clamp(Rem(0.15), 2, 4), 0, Height))
 							end),
+							BackgroundTransparency = State:map(function(Value)
+								return if (Value > Scale) then 0 else 0.75
+							end),
+							Position = UDim2.fromScale(Scale, 0.5),
+							AnchorPoint = pAnchor.Center.Center,
+							ZIndex = 2,
 						}, {
 							Roact.createElement(Corner, {
 								Radius = Properties.Radius,
@@ -156,19 +156,19 @@ local Slider = withHooks(function(Properties)
 		})
 	end)
 	local _attributes = {
-		Reference = OuterReference,
-		Value = V,
-		Size = Properties.Size,
-		Position = Properties.Position,
-		AnchorPoint = Properties.AnchorPoint,
-		BackgroundColor3 = Properties.BackgroundColor3,
-		ForegroundColor3 = Properties.ForegroundColor3,
-		Width = Properties.Width,
 		Height = toBinding(Properties.Height):map(function(Value)
 			return Value * 0.75
 		end),
+		BackgroundColor3 = Properties.BackgroundColor3,
+		ForegroundColor3 = Properties.ForegroundColor3,
+		AnchorPoint = Properties.AnchorPoint,
+		Position = Properties.Position,
 		Radius = Properties.Radius,
 		Spring = Properties.Spring,
+		Reference = OuterReference,
+		Width = Properties.Width,
+		Size = Properties.Size,
+		Value = V,
 	}
 	local _children = {
 		Roact.createElement(Frame, {

@@ -25,10 +25,10 @@ local Progress = withHooks(function(Properties)
 		Motion:spring(Value, getBindingValue(Properties.Spring))
 	end)
 	local _attributes = {
-		Size = Properties.Size,
-		Position = Properties.Position,
 		AnchorPoint = Properties.AnchorPoint,
-		BackgroundTransparency = 1,
+		Position = Properties.Position,
+		Size = Properties.Size,
+		Transparent = true,
 	}
 	local _children = {}
 	local _length = #_children
@@ -44,11 +44,6 @@ local Progress = withHooks(function(Properties)
 	end
 	_length = #_children
 	_children.Group = Roact.createElement(CanvasGroup, {
-		[Roact.Ref] = Properties.Reference,
-		BackgroundColor3 = Properties.BackgroundColor3 or Theme.Default.Default100,
-		BackgroundTransparency = 0,
-		AnchorPoint = pAnchor.Center.Center,
-		Position = pPoint.Center.Center,
 		Size = joinAnyBindings({
 			W = Properties.Width,
 			H = Properties.Height,
@@ -63,15 +58,19 @@ local Progress = withHooks(function(Properties)
 			end
 			return UDim2.new(_condition, 0, 0, Rem(_condition_1))
 		end),
+		BackgroundColor3 = Properties.BackgroundColor3 or Theme.Default.Default100,
+		[Roact.Ref] = Properties.Reference,
+		AnchorPoint = pAnchor.Center.Center,
+		Position = pPoint.Center.Center,
 	}, {
 		Roact.createElement(Corner, {
 			Radius = Properties.Radius,
 		}),
 		Foreground = Roact.createElement(Frame, {
-			BackgroundColor3 = Properties.ForegroundColor3 or Theme.Primary.Primary400,
 			Size = State:map(function(Value)
 				return UDim2.fromScale(math.clamp(Value, 0, 1), 1)
 			end),
+			BackgroundColor3 = Properties.ForegroundColor3 or Theme.Primary.Primary400,
 		}, {
 			Roact.createElement(Corner, {
 				Radius = Properties.Radius,

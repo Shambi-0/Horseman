@@ -7,7 +7,7 @@ local UserInputService = _services.UserInputService
 local useEventListener = TS.import(script, TS.getModule(script, "@rbxts", "pretty-roact-hooks").out).useEventListener
 local withHooks = TS.import(script, TS.getModule(script, "@rbxts", "roact-hooked").src).withHooks
 local useDebounce = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks").useDebounce
-local Group = TS.import(script, script.Parent, "Group").Group
+local Frame = TS.import(script, script.Parent, "Frame").Frame
 local IS_EDIT = RunService:IsStudio() and not RunService:IsRunning()
 local Capture = withHooks(function(Properties)
 	local _, Try = useDebounce(Properties.Cooldown)
@@ -36,14 +36,14 @@ local Capture = withHooks(function(Properties)
 			end
 		end
 	end)
-	return Roact.createElement(Group, {
+	return Roact.createElement(Frame, {
 		Selectable = true,
 		ClipsDescendants = true,
 		[Roact.Ref] = FrameRef,
 		Size = Properties.Size,
 		Position = Properties.Position,
 		AnchorPoint = Properties.AnchorPoint,
-		zIndex = math.huge,
+		ZIndex = math.huge,
 		Event = {
 			InputBegan = (function(O, I)
 				if Try() and Properties.onInputBegan then

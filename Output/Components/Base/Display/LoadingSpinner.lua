@@ -35,11 +35,11 @@ local LoadingSpinner = withHooks(function(Properties)
 		local DotPosition, DotTransparency = AnimationFromOffset(Delay)
 		return Roact.createFragment({
 			["Dot" .. tostring(Index)] = Roact.createElement(Frame, {
-				AnchorPoint = pAnchor.Center.Center,
 				Size = UDim2.fromScale(getBindingValue(Properties.Scale), getBindingValue(Properties.Scale)),
 				BackgroundTransparency = DotTransparency,
-				Position = DotPosition,
+				AnchorPoint = pAnchor.Center.Center,
 				BackgroundColor3 = Properties.Color,
+				Position = DotPosition,
 			}, {
 				Roact.createElement(AspectRatio, {
 					Ratio = 1,
@@ -59,11 +59,10 @@ local LoadingSpinner = withHooks(function(Properties)
 	-- ▲ ReadonlyArray.map ▲
 	local _attributes = {
 		GroupTransparency = Properties.BackgroundTransparency,
-		BackgroundTransparency = 1,
-		Size = Properties.Size,
-		Position = Properties.Position,
 		AnchorPoint = Properties.AnchorPoint,
+		Position = Properties.Position,
 		Visible = Properties.Visible,
+		Size = Properties.Size,
 	}
 	local _children = {
 		Roact.createElement(AspectRatio, {

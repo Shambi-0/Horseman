@@ -47,10 +47,9 @@ export const Rating = withHooks<Bindable<Properties, Frame>>(Properties => {
         Digits.push(
             <Frame
                 Key={`Digit${Index}`}
-                Size={pSize.Full}
                 SizeConstraint={Enum.SizeConstraint.RelativeYY}
-                BackgroundTransparency={1}
                 LayoutOrder={-Index}
+                Transparent
             >
                 <Image
                     Key="Icon"
@@ -86,16 +85,16 @@ export const Rating = withHooks<Bindable<Properties, Frame>>(Properties => {
     return (
         <Frame
             Size={toBinding(Properties.Digits!).map(Value => UDim2.fromScale(Value, 1))}
-            Position={Properties.Position}
-            AnchorPoint={Properties.AnchorPoint}
             SizeConstraint={Enum.SizeConstraint.RelativeYY}
-            BackgroundTransparency={1}
+            AnchorPoint={Properties.AnchorPoint}
+            Position={Properties.Position}
+            Transparent
         >
             <uilistlayout
-                Key="Layout"
-                FillDirection={Enum.FillDirection.Horizontal}
                 HorizontalAlignment={Enum.HorizontalAlignment.Center}
                 VerticalAlignment={Enum.VerticalAlignment.Center}
+                FillDirection={Enum.FillDirection.Horizontal}
+                Key="Layout"
             />
             { Digits }
         </Frame>

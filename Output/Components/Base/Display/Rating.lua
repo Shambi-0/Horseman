@@ -9,7 +9,6 @@ local _roact_hooked = TS.import(script, TS.getModule(script, "@rbxts", "roact-ho
 local useBinding = _roact_hooked.useBinding
 local useEffect = _roact_hooked.useEffect
 local withHooks = _roact_hooked.withHooks
-local pSize = TS.import(script, TS.getModule(script, "@rbxts", "precomputed").out).pSize
 local useMotion = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks", "use-motion.hook").useMotion
 local Frame = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Frame").Frame
 local Image = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Image").Image
@@ -56,10 +55,9 @@ local Rating = withHooks(function(Properties)
 			end, { Properties.Value, Properties.Digits })
 			local _arg0 = Roact.createFragment({
 				["Digit" .. tostring(Index)] = Roact.createElement(Frame, {
-					Size = pSize.Full,
 					SizeConstraint = Enum.SizeConstraint.RelativeYY,
-					BackgroundTransparency = 1,
 					LayoutOrder = -Index,
+					Transparent = true,
 				}, {
 					Icon = Roact.createElement(Image, {
 						Image = Density:map(function(Stage)
@@ -91,16 +89,16 @@ local Rating = withHooks(function(Properties)
 		Size = toBinding(Properties.Digits):map(function(Value)
 			return UDim2.fromScale(Value, 1)
 		end),
-		Position = Properties.Position,
-		AnchorPoint = Properties.AnchorPoint,
 		SizeConstraint = Enum.SizeConstraint.RelativeYY,
-		BackgroundTransparency = 1,
+		AnchorPoint = Properties.AnchorPoint,
+		Position = Properties.Position,
+		Transparent = true,
 	}
 	local _children = {
 		Layout = Roact.createElement("UIListLayout", {
-			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
+			FillDirection = Enum.FillDirection.Horizontal,
 		}),
 	}
 	local _length = #_children

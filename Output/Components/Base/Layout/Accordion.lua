@@ -17,15 +17,15 @@ local pAnchor = _precomputed.pAnchor
 local pPoint = _precomputed.pPoint
 local useToggle = TS.import(script, TS.getModule(script, "@rbxts", "roact-hooked-plus").out).useToggle
 local RunService = TS.import(script, TS.getModule(script, "@rbxts", "services")).RunService
+local _Hooks = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks")
+local useMotion = _Hooks.useMotion
+local useRem = _Hooks.useRem
+local useSounds = _Hooks.useSounds
 local getSounds = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "getSounds").default
 local Capture = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Capture").Capture
 local Frame = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Frame").Frame
 local Image = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Image").Image
 local Text = TS.import(script, script.Parent.Parent.Parent, "Core", "Components", "Text").Text
-local _Hooks = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Hooks")
-local useMotion = _Hooks.useMotion
-local useRem = _Hooks.useRem
-local useSounds = _Hooks.useSounds
 local GroupContext = Roact.createContext({
 	Register = nil,
 	Update = nil,
@@ -71,7 +71,7 @@ do
 			Size = Height:map(function(Value)
 				return UDim2.new(1, 0, 0, Value)
 			end),
-			BackgroundTransparency = 1,
+			Transparent = true,
 		}
 		local _children_1 = {
 			Layout = Roact.createElement("UIListLayout", {
@@ -158,8 +158,8 @@ do
 			Size = Height:map(function(Value)
 				return UDim2.new(1, 0, 0, Value)
 			end),
-			BackgroundTransparency = 1,
 			ClipsDescendants = true,
+			Transparent = true,
 		}
 		local _children_1 = {
 			Roact.createElement(Frame, {
@@ -171,7 +171,7 @@ do
 			}),
 			Heading = Roact.createElement(Frame, {
 				Size = UDim2.new(1, 0, 0, TopbarHeight),
-				BackgroundTransparency = 1,
+				Transparent = true,
 			}, {
 				Roact.createElement(Accordion.Trigger),
 				Title = Roact.createElement(Text, {
@@ -192,8 +192,8 @@ do
 			end),
 			Position = UDim2.new(0.5, 0, 0, TopbarHeight),
 			AnchorPoint = pAnchor.Center.Top,
-			BackgroundTransparency = 1,
 			ClipsDescendants = Clip,
+			Transparent = true,
 		}
 		local _children_2 = {}
 		local _length_2 = #_children_2
@@ -202,9 +202,9 @@ do
 			AutomaticSize = Enum.AutomaticSize.Y,
 			AnchorPoint = pAnchor.Center.Bottom,
 			Size = UDim2.fromScale(1, 0),
-			BackgroundTransparency = 1,
 			[Roact.Ref] = Reference,
 			LayoutOrder = 1,
+			Transparent = true,
 		}
 		local _children_3 = {}
 		local _length_3 = #_children_3
@@ -247,8 +247,8 @@ do
 			SizeConstraint = Properties.SizeConstraint,
 			AnchorPoint = Properties.AnchorPoint,
 			Position = Properties.Position,
-			BackgroundTransparency = 1,
 			Size = Properties.Size,
+			Transparent = true,
 		}
 		local _children = {
 			Roact.createElement(Capture, {
@@ -263,7 +263,7 @@ do
 		}
 		local _length = #_children
 		local _attributes_1 = {
-			BackgroundTransparency = 1,
+			Transparent = true,
 		}
 		local _children_1 = {
 			Icon = Roact.createElement(Image, {

@@ -5,6 +5,7 @@
 /// <reference types="roact" />
 /// <reference types="@rbxts/compiler-types" />
 import Roact from "@rbxts/roact";
+import { Frame } from "./Frame";
 export declare const IS_EDIT: boolean;
 export declare const Capture: (props: Partial<{
     readonly onHovering: (Hovering: boolean) => void;

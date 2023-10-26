@@ -2,8 +2,19 @@
 local TS = _G[script]
 local Roact = TS.import(script, TS.getModule(script, "@rbxts", "roact").src)
 local withHooks = TS.import(script, TS.getModule(script, "@rbxts", "roact-hooked").src).withHooks
-local pSize = TS.import(script, TS.getModule(script, "@rbxts", "precomputed").out).pSize
+local _precomputed = TS.import(script, TS.getModule(script, "@rbxts", "precomputed").out)
+local pAnchor = _precomputed.pAnchor
+local pPoint = _precomputed.pPoint
+local pSize = _precomputed.pSize
+local getBindingValue = TS.import(script, TS.getModule(script, "@rbxts", "pretty-roact-hooks").out).getBindingValue
 local Frame = withHooks(function(Properties)
+	if getBindingValue(Properties.Transparent) == true then
+		Properties.BackgroundTransparency = 1
+	end
+	if getBindingValue(Properties.Center) == true then
+		Properties.AnchorPoint = Properties.AnchorPoint or pAnchor.Center.Center
+		Properties.Position = Properties.Position or pPoint.Center.Center
+	end
 	local _attributes = {}
 	for _k, _v in Properties do
 		_attributes[_k] = _v

@@ -10,6 +10,7 @@ export declare const Stroke: (props: Partial<{
     LineJoin: import("@rbxts/pretty-roact-hooks").BindingOrValue<Enum.LineJoinMode>;
     Transparency: import("@rbxts/pretty-roact-hooks").BindingOrValue<number>;
     Thickness: import("@rbxts/pretty-roact-hooks").BindingOrValue<number>;
+    Scaled: import("@rbxts/pretty-roact-hooks").BindingOrValue<boolean>;
     Color: import("@rbxts/pretty-roact-hooks").BindingOrValue<Color3>;
 } & {
     [Children]?: Roact.Children | undefined;

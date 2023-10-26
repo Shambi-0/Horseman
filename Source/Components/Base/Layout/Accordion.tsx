@@ -6,13 +6,13 @@ import { pAnchor, pPoint } from "@rbxts/precomputed";
 import { useToggle } from "@rbxts/roact-hooked-plus";
 import { RunService } from "@rbxts/services";
 
+import { useMotion, useRem, useSounds } from "../../../Utility/Hooks";
 import getSounds from "../../../Utility/getSounds";
 
 import { Capture } from "../../Core/Components/Capture";
 import { Frame } from "../../Core/Components/Frame";
 import { Image } from "../../Core/Components/Image";
 import { Text } from "../../Core/Components/Text";
-import { useMotion, useRem, useSounds } from "../../../Utility/Hooks";
 
 const GroupContext = Roact.createContext({
 	Register: identity<((H: Roact.Binding<number>) => number) | undefined>(undefined),
@@ -58,7 +58,7 @@ namespace Accordion {
 			<GroupContext.Provider value={Source}>
 				<Frame
 					Size={Height.map((Value) => new UDim2(1, 0, 0, Value))}
-					BackgroundTransparency={1}
+					Transparent
 				>
 					<uilistlayout
 						HorizontalAlignment={Enum.HorizontalAlignment.Center}
@@ -121,8 +121,8 @@ namespace Accordion {
 			<ContentContext.Provider value={Source}>
 				<Frame
 					Size={Height.map((Value: number) => new UDim2(1, 0, 0, Value))}
-					BackgroundTransparency={1}
 					ClipsDescendants
+					Transparent
 				>
 					<Frame
 						Size={new UDim2(0.95, 0, 0, math.clamp(Rem(0.15), 1, 8))}
@@ -133,8 +133,8 @@ namespace Accordion {
 					/>
 					<Frame
 						Size={new UDim2(1, 0, 0, TopbarHeight)}
-						BackgroundTransparency={1}
 						Key="Heading"
+						Transparent
 					>
 						<Accordion.Trigger />
 						<Text
@@ -152,19 +152,19 @@ namespace Accordion {
 						Size={ContentHeight.map((Value) => new UDim2(1, 0, 0, Value))}
 						Position={new UDim2(0.5, 0, 0, TopbarHeight)}
 						AnchorPoint={pAnchor.Center.Top}
-						BackgroundTransparency={1}
 						ClipsDescendants={Clip}
 						Key="Content"
+						Transparent
 					>
 						<Frame
 							Position={new UDim2(0.5, 0, 1, -BottomPadding)}
 							AutomaticSize={Enum.AutomaticSize.Y}
 							AnchorPoint={pAnchor.Center.Bottom}
 							Size={UDim2.fromScale(1, 0)}
-							BackgroundTransparency={1}
 							Ref={Reference}
 							LayoutOrder={1}
 							Key="Container"
+							Transparent
 						>
 							{ Properties[Roact.Children] }
 						</Frame>
@@ -197,9 +197,9 @@ namespace Accordion {
 				SizeConstraint={Properties.SizeConstraint}
 				AnchorPoint={Properties.AnchorPoint}
 				Position={Properties.Position}
-				BackgroundTransparency={1}
 				Size={Properties.Size}
 				Key="Trigger"
+				Transparent
 			>
 				<Capture
 					Cooldown={0.35}
@@ -214,8 +214,8 @@ namespace Accordion {
 					}}
 				/>
 				<Frame
-					BackgroundTransparency={1}
 					Key="Container"
+					Transparent
 				>
 					<Image
 						Image="http://www.roblox.com/asset/?id=6031094670"

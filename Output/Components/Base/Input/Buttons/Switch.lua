@@ -46,10 +46,10 @@ local Switch = withHooks(function(Properties)
 		})
 	end, { Toggled })
 	return Roact.createElement(Frame, {
-		Size = Properties.Size,
-		Position = Properties.Position,
 		AnchorPoint = Properties.AnchorPoint,
-		BackgroundTransparency = 1,
+		Position = Properties.Position,
+		Size = Properties.Size,
+		Transparent = true,
 	}, {
 		Sizing = Roact.createElement("UISizeConstraint", {
 			MinSize = Vector2.new(0, 32),
@@ -58,6 +58,7 @@ local Switch = withHooks(function(Properties)
 			Ratio = 1.75,
 		}),
 		Container = Roact.createElement(Frame, {
+			Center = true,
 			AnchorPoint = pAnchor.Center.Center,
 			Position = pPoint.Center.Center,
 			Size = Hovering:map(function(Value)
@@ -90,15 +91,15 @@ local Switch = withHooks(function(Properties)
 				end,
 			}),
 			Roact.createElement(Frame, {
-				Size = UDim2.fromScale(0.85, 0.85),
-				SizeConstraint = Enum.SizeConstraint.RelativeYY,
-				BackgroundColor3 = Theme.Default.Default900,
 				Position = Progress:map(function(Value)
 					return UDim2.fromScale(0.05, 0.5):Lerp(UDim2.fromScale(0.95, 0.5), Value)
 				end),
 				AnchorPoint = Progress:map(function(Value)
 					return pAnchor.Left.Center:Lerp(pAnchor.Right.Center, Value)
 				end),
+				SizeConstraint = Enum.SizeConstraint.RelativeYY,
+				BackgroundColor3 = Theme.Default.Default900,
+				Size = UDim2.fromScale(0.85, 0.85),
 			}, {
 				Roact.createElement(Corner, {
 					Radius = Properties.Radius,

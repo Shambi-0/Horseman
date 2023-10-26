@@ -55,8 +55,8 @@ local Checkbox = withHooks(function(Properties)
 	local _attributes = {
 		AnchorPoint = Properties.AnchorPoint,
 		Position = Properties.Position,
-		BackgroundTransparency = 1,
 		Size = Properties.Size,
+		Transparent = true,
 	}
 	local _children = {
 		Sizing = Roact.createElement("UISizeConstraint", {
@@ -68,8 +68,7 @@ local Checkbox = withHooks(function(Properties)
 	}
 	local _length = #_children
 	local _attributes_1 = {
-		AnchorPoint = pAnchor.Center.Center,
-		Position = pPoint.Center.Center,
+		Center = true,
 		Size = Hovering:map(function(Value)
 			local _full = pSize.Full
 			local _arg0 = pSize.None:Lerp(UDim2.fromScale(0.2, 0.2), Value)

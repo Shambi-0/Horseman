@@ -51,8 +51,8 @@ local NumberSpinner = withHooks(function(Properties)
 			local _attributes = {
 				SizeConstraint = Enum.SizeConstraint.RelativeYY,
 				Size = UDim2.fromScale(0.6, 1),
-				BackgroundTransparency = 1,
 				LayoutOrder = -Index,
+				Transparent = true,
 			}
 			local _children = {}
 			local _length = #_children
@@ -79,8 +79,8 @@ local NumberSpinner = withHooks(function(Properties)
 				Position = Lifetime.value:map(function()
 					return UDim2.fromScale(0, -(FuaxRotation:getValue() % 10))
 				end),
-				BackgroundTransparency = 1,
 				Size = pSize.Full,
+				Transparent = true,
 			}
 			local _children_1 = {}
 			local _length_1 = #_children_1
@@ -109,8 +109,7 @@ local NumberSpinner = withHooks(function(Properties)
 	local _length = #_children
 	local _value = getBindingValue(Properties.Prefix)
 	local _attributes_1 = {
-		BackgroundTransparency = 1,
-		Size = pSize.Full,
+		Transparent = true,
 	}
 	local _children_1 = {
 		Layout = Roact.createElement("UIListLayout", {
@@ -125,8 +124,8 @@ local NumberSpinner = withHooks(function(Properties)
 		Prefix = Roact.createElement(Frame, {
 			Size = UDim2.fromScale(0.45 * #getBindingValue(Properties.Prefix), 1),
 			SizeConstraint = Enum.SizeConstraint.RelativeYY,
-			BackgroundTransparency = 1,
 			LayoutOrder = -math.huge,
+			Transparent = true,
 		}, {
 			Roact.createElement(Text, {
 				Text = toBinding(Properties.Prefix):map(function(Value)

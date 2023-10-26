@@ -32,6 +32,9 @@
                 "EXPERIMENTAL_JSDocConstEnumUUID": true
             },
 			{
+				"transform": "rbxts-transformer-keys"
+			},
+			{
 				"transform": "rbxts-transformer-services"
 			},
 			{

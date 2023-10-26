@@ -57,8 +57,8 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
         <Frame
             AnchorPoint={Properties.AnchorPoint}
             Position={Properties.Position}
-            BackgroundTransparency={1}
             Size={Properties.Size}
+            Transparent
         >
             <uisizeconstraint
                 MinSize={new Vector2(0, 32)}
@@ -66,9 +66,8 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
             />
             <AspectRatio Ratio={1} />
             <Frame
+                Center
                 Key="Container"
-                AnchorPoint={pAnchor.Center.Center}
-                Position={pPoint.Center.Center}
                 Size={Hovering.map((Value: number) => pSize.Full.add(pSize.None.Lerp(UDim2.fromScale(0.2, 0.2), Value)))}
                 BackgroundColor3={
                     Lifetime.value.map(() => {

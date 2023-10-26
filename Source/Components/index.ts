@@ -2,12 +2,11 @@
 import { CanvasGroup } from "./Core/Components/CanvasGroup";
 import { Capture } from "./Core/Components/Capture";
 import { Frame } from "./Core/Components/Frame";
-import { Group } from "./Core/Components/Group";
 import { Image } from "./Core/Components/Image";
 import { Text } from "./Core/Components/Text";
 
 /** @hidden */
-export { CanvasGroup, Capture, Frame, Group, Image, Text };
+export { CanvasGroup, Capture, Frame, Image, Text };
 
 // Primitive Constraints
 import { AspectRatio } from "./Core/Constraints/AspectRatio";

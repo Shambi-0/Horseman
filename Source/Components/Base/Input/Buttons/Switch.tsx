@@ -51,10 +51,10 @@ export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Propert
 
     return (
         <Frame
-            Size={Properties.Size}
-            Position={Properties.Position}
             AnchorPoint={Properties.AnchorPoint}
-            BackgroundTransparency={1}
+            Position={Properties.Position}
+            Size={Properties.Size}
+            Transparent
         >
             <uisizeconstraint
                 Key="Sizing"
@@ -63,6 +63,7 @@ export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Propert
             <AspectRatio Ratio={1.75} />
             <Frame
                 Key="Container"
+                Center
                 AnchorPoint={pAnchor.Center.Center}
                 Position={pPoint.Center.Center}
                 Size={Hovering.map(Value => pSize.Full.add(pSize.None.Lerp(UDim2.fromScale(0.2, 0.2), Value)))}
@@ -92,11 +93,11 @@ export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Propert
                     }
                 />
                 <Frame
-                    Size={UDim2.fromScale(0.85, 0.85)}
-                    SizeConstraint={Enum.SizeConstraint.RelativeYY}
-                    BackgroundColor3={Theme.Default.Default900}
                     Position={Progress.map((Value: number) => UDim2.fromScale(0.05, 0.5).Lerp(UDim2.fromScale(0.95, 0.5), Value))}
                     AnchorPoint={Progress.map((Value: number) => pAnchor.Left.Center.Lerp(pAnchor.Right.Center, Value))}
+                    SizeConstraint={Enum.SizeConstraint.RelativeYY}
+                    BackgroundColor3={Theme.Default.Default900}
+                    Size={UDim2.fromScale(0.85, 0.85)}
                 >
                     <Corner Radius={Properties.Radius} />
                 </Frame>

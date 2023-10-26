@@ -58,13 +58,12 @@ export const LoadingSpinner = withHooks<Bindable<Properties, Frame>>((Properties
 
 	return (
 		<CanvasGroup
-			Key="Spinner"
 			GroupTransparency={Properties.BackgroundTransparency}
-			BackgroundTransparency={1}
-			Size={Properties.Size}
-			Position={Properties.Position}
 			AnchorPoint={Properties.AnchorPoint}
+			Position={Properties.Position}
 			Visible={Properties.Visible}
+			Size={Properties.Size}
+			Key="Spinner"
 		>
 			<AspectRatio Ratio={1} />
 			{
@@ -73,12 +72,12 @@ export const LoadingSpinner = withHooks<Bindable<Properties, Frame>>((Properties
 
 					return (
 						<Frame
-							Key={`Dot${Index}`}
-							AnchorPoint={pAnchor.Center.Center}
 							Size={UDim2.fromScale(getBindingValue(Properties.Scale), getBindingValue(Properties.Scale))}
 							BackgroundTransparency={DotTransparency}
-							Position={DotPosition}
+							AnchorPoint={pAnchor.Center.Center}
 							BackgroundColor3={Properties.Color}
+							Position={DotPosition}
+							Key={`Dot${Index}`}
 						>
 							<AspectRatio Ratio={1} />
 							<Corner Radius={1} />

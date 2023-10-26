@@ -6,7 +6,7 @@ import { withHooks } from "@rbxts/roact-hooked";
 
 import { useDebounce } from "../../../Utility/Hooks";
 
-import { Group } from "./Group";
+import { Frame } from "./Frame";
 
 export const IS_EDIT = RunService.IsStudio() && !RunService.IsRunning();
 
@@ -43,14 +43,14 @@ export const Capture = withHooks<Bindable<Properties, Instance, "onHovering" | "
     });
 
     return (
-        <Group
+        <Frame
             Selectable
             ClipsDescendants
             Ref={FrameRef}
             Size={Properties.Size}
             Position={Properties.Position}
             AnchorPoint={Properties.AnchorPoint}
-            zIndex={math.huge}
+            ZIndex={math.huge}
             Event={{
                 InputBegan: ((O: Frame, I: InputObject) => {
                     if (Try() && Properties.onInputBegan) Properties.onInputBegan(O, I, false)

@@ -4,7 +4,6 @@ local TS = _G[script]
 local CanvasGroup = TS.import(script, script, "Core", "Components", "CanvasGroup").CanvasGroup
 local Capture = TS.import(script, script, "Core", "Components", "Capture").Capture
 local Frame = TS.import(script, script, "Core", "Components", "Frame").Frame
-local Group = TS.import(script, script, "Core", "Components", "Group").Group
 local Image = TS.import(script, script, "Core", "Components", "Image").Image
 local Text = TS.import(script, script, "Core", "Components", "Text").Text
 --* @hidden 
@@ -25,14 +24,15 @@ local Checkbox = TS.import(script, script, "Base", "Input", "Buttons", "Checkbox
 local Switch = TS.import(script, script, "Base", "Input", "Buttons", "Switch").Switch
 local Progress = TS.import(script, script, "Base", "Display", "Progress").Progress
 local Rating = TS.import(script, script, "Base", "Display", "Rating").Rating
+local Line = TS.import(script, script, "Base", "Decoration", "Line").Line
 local Slider = TS.import(script, script, "Base", "Input", "Slider").Slider
+local Dot = TS.import(script, script, "Base", "Decoration", "Dot").Dot
 local Accordion = TS.import(script, script, "Base", "Layout", "Accordion")
 --* @hidden 
 return {
 	CanvasGroup = CanvasGroup,
 	Capture = Capture,
 	Frame = Frame,
-	Group = Group,
 	Image = Image,
 	Text = Text,
 	AspectRatio = AspectRatio,
@@ -49,6 +49,8 @@ return {
 	Switch = Switch,
 	Progress = Progress,
 	Rating = Rating,
+	Line = Line,
 	Slider = Slider,
+	Dot = Dot,
 	Accordion = Accordion,
 }

@@ -8,6 +8,7 @@ export declare const AspectRatio: (props: Partial<{
     Ratio: import("@rbxts/pretty-roact-hooks").BindingOrValue<number>;
     Type: import("@rbxts/pretty-roact-hooks").BindingOrValue<Enum.AspectType>;
     Axis: import("@rbxts/pretty-roact-hooks").BindingOrValue<Enum.DominantAxis>;
+    Square: import("@rbxts/pretty-roact-hooks").BindingOrValue<boolean>;
 } & {
     [Children]?: Roact.Children | undefined;
 } & Roact.JsxInstanceProperties<UIConstraint> & {

@@ -86,13 +86,13 @@ export const Slider = withHooks<Bindable<Properties, Frame>>(Properties => {
 
                 Output.push(
                     <Frame
+                        BackgroundColor3={State.map((Value: number) => ((Value > Scale) ? (getBindingValue(Properties.ForegroundColor3!) || Theme.Primary.Primary500!) : Theme.Default.Default600!))}
+                        Size={State.map((Value: number) => ((Value > Scale) ? UDim2.fromOffset(Size, Size) : (new UDim2(0, math.clamp(Rem(0.15), 2, 4), 0, Height))))}
+                        BackgroundTransparency={State.map((Value: number) => ((Value > Scale) ? 0 : 0.75))}
+                        Position={UDim2.fromScale(Scale, 0.5)}
+                        AnchorPoint={pAnchor.Center.Center}
                         Key={`m${Index}`}
                         ZIndex={2}
-                        AnchorPoint={pAnchor.Center.Center}
-                        Position={UDim2.fromScale(Scale, 0.5)}
-                        BackgroundColor3={State.map((Value: number) => ((Value > Scale) ? (getBindingValue(Properties.ForegroundColor3!) || Theme.Primary.Primary500!) : Theme.Default.Default600!))}
-                        BackgroundTransparency={State.map((Value: number) => ((Value > Scale) ? 0 : 0.75))}
-                        Size={State.map((Value: number) => ((Value > Scale) ? UDim2.fromOffset(Size, Size) : (new UDim2(0, math.clamp(Rem(0.15), 2, 4), 0, Height))))}
                     >
                         <Corner Radius={Properties.Radius} />
                     </Frame>
@@ -136,18 +136,18 @@ export const Slider = withHooks<Bindable<Properties, Frame>>(Properties => {
 
     return (
         <Progress
-            Key="Slider"
-            Reference={OuterReference}
-            Value={V}
-            Size={Properties.Size}
-            Position={Properties.Position}
-            AnchorPoint={Properties.AnchorPoint}
+            Height={toBinding(Properties.Height!).map(Value => Value * 0.75)}
             BackgroundColor3={Properties.BackgroundColor3}
             ForegroundColor3={Properties.ForegroundColor3}
-            Width={Properties.Width}
-            Height={toBinding(Properties.Height!).map(Value => Value * 0.75)}
+            AnchorPoint={Properties.AnchorPoint}
+            Position={Properties.Position}
             Radius={Properties.Radius}
             Spring={Properties.Spring}
+            Reference={OuterReference}
+            Width={Properties.Width}
+            Size={Properties.Size}
+            Key="Slider"
+            Value={V}
         >
             <Frame
                 Ref={InnerReference}

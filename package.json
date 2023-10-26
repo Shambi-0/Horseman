@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/horseman",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "",
   "main": "Output/init.lua",
   "scripts": {
@@ -41,6 +41,7 @@
     "prettier": "^3.0.3",
     "rbxts-transform-env": "^2.2.0",
     "rbxts-transform-guid": "^2.0.0",
+    "rbxts-transformer-keys": "^0.5.0-rc.2",
     "rbxts-transformer-services": "^1.0.1",
     "rbxts-transformer-setget": "^1.0.7",
     "rbxts-transformer-switchcase": "^1.0.1",

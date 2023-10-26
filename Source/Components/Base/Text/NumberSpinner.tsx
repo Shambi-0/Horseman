@@ -52,14 +52,14 @@ export const NumberSpinner = withHooks<Bindable<Properties, Instance>>((Properti
             <Frame
                 SizeConstraint={Enum.SizeConstraint.RelativeYY}
                 Size={UDim2.fromScale(0.6, 1)}
-                BackgroundTransparency={1}
                 Key={`Digit${Index}`}
                 LayoutOrder={-Index}
+                Transparent
             >
                 <Frame
                     Position={Lifetime.value.map(() => UDim2.fromScale(0, -(FuaxRotation.getValue() % 10)))}
-                    BackgroundTransparency={1}
                     Size={pSize.Full}
+                    Transparent
                     Key="Shift"
                 >
                     {
@@ -94,9 +94,8 @@ export const NumberSpinner = withHooks<Bindable<Properties, Instance>>((Properti
             Key="Spinner"
         >
             <Frame
-                BackgroundTransparency={1}
-                Size={pSize.Full}
                 Key="Content"
+                Transparent
             >
                 <uilistlayout
                     HorizontalAlignment={Enum.HorizontalAlignment.Center}
@@ -109,9 +108,9 @@ export const NumberSpinner = withHooks<Bindable<Properties, Instance>>((Properti
                    <Frame
                         Size={UDim2.fromScale(0.45 * getBindingValue(Properties.Prefix!).size(), 1)}
                         SizeConstraint={Enum.SizeConstraint.RelativeYY}
-                        BackgroundTransparency={1}
                         LayoutOrder={-math.huge}
                         Key="Prefix"
+                        Transparent
                     >
                         <Text
                             Text={toBinding(Properties.Prefix!).map(Value => Value.gsub(".", (Character: string) => `${Character}  `)[0])}
