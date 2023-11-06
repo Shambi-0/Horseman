@@ -113,8 +113,8 @@ export const Switch = withHooks<Bindable<Properties, Frame, "Callback">>(Propert
         Callback: () => {},
         Cooldown: 0.25,
         Spring: {
-            "damping": 0.6,
-            "frequency": 5
+            damping: 0.6,
+            frequency: 5
         }
     }
 });

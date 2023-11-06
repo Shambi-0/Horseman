@@ -154,8 +154,8 @@ export const Checkbox = withHooks<Bindable<Properties, Frame, "Callback">>(Prope
         Callback: () => {},
         Cooldown: 0.15,
         Spring: {
-            "damping": 0.6,
-            "frequency": 6
+            damping: 0.6,
+            frequency: 6
         }
     }
 });

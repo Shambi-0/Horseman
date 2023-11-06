@@ -3,19 +3,15 @@ import { Boolean, Choose, Color, Slider } from "@rbxts/ui-labs/out/ControlsUtil"
 
 export namespace StoryControls {
     export type STORY_LISTENER = {
-        InputBegan: RBXScriptSignal<(Input: InputObject, GameProcessed: boolean) => void>,
-        InputEnded: RBXScriptSignal<(Input: InputObject, GameProcessed: boolean) => void>,
+        InputBegan:   RBXScriptSignal<(Input: InputObject, GameProcessed: boolean) => void>,
+        InputEnded:   RBXScriptSignal<(Input: InputObject, GameProcessed: boolean) => void>,
         InputChanged: RBXScriptSignal<(Input: InputObject, GameProcessed: boolean) => void>,
-        MouseMoved: RBXScriptSignal<(Position: Vector2, GameProcessed: boolean) => void>
+        MouseMoved:   RBXScriptSignal<(Position: Vector2,  GameProcessed: boolean) => void>
     };
 
-    export type Default = {
-
-    };
+    export type Default = {};
     
-    export const Default = {
-
-    } as unknown as Default;
+    export const Default = {} as unknown as Default;
 
     export type RATING_CONTROLS = {
         Digits: number,

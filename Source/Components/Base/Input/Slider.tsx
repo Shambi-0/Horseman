@@ -198,8 +198,8 @@ export const Slider = withHooks<Bindable<Properties, Frame>>(Properties => {
         Max: 1,
 
         Spring: {
-            "damping": 0.8,
-            "frequency": 3
+            damping: 0.8,
+            frequency: 3
         }
     }
 });

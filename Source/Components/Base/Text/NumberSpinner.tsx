@@ -139,8 +139,8 @@ export const NumberSpinner = withHooks<Bindable<Properties, Instance>>((Properti
         Digits: 4,
 
         Spring: {
-            "damping": 0.5,
-            "frequency": 6
+            damping: 0.5,
+            frequency: 6
         }
     }
 });

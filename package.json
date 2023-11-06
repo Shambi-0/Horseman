@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/horseman",
-  "version": "1.1.1-dev",
+  "version": "1.1.2-dev",
   "description": "",
   "main": "Output/init.lua",
   "scripts": {
@@ -40,7 +40,6 @@
     "eslint-plugin-roblox-ts": "^0.0.36",
     "prettier": "^3.0.3",
     "rbxts-transform-env": "^2.2.0",
-    "rbxts-transform-guid": "^2.0.0",
     "rbxts-transformer-keys": "^0.5.0-rc.2",
     "rbxts-transformer-services": "^1.0.1",
     "rbxts-transformer-setget": "^1.0.7",
@@ -49,7 +48,7 @@
   },
   "dependencies": {
     "@rbxts/colour-utils": "^1.4.1",
-    "@rbxts/geom": "^1.0.2",
+    "@rbxts/geom": "^1.1.19",
     "@rbxts/janitor": "^1.15.4-ts.0",
     "@rbxts/precomputed": "^1.0.2",
     "@rbxts/pretty-roact-hooks": "^3.2.0",

@@ -67,8 +67,8 @@ export const Progress = withHooks<Bindable<Properties, Frame>>(Properties => {
         Height: 2,
         Radius: 1,
         Spring: {
-            "damping": 0.8,
-            "frequency": 3
+            damping: 0.8,
+            frequency: 3
         }
     }
 });

@@ -9,7 +9,7 @@ const ListLayout = withHooks<Bindable<Properties, Instance>>(Properties => {
     );
 }, {
     "defaultProps": {
-        "Key": "Layout"
+        Key: "Layout"
     }
 });
 

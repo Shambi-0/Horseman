@@ -28,10 +28,6 @@
 
 		"plugins": [
 			{
-                "transform": "rbxts-transform-guid",
-                "EXPERIMENTAL_JSDocConstEnumUUID": true
-            },
-			{
 				"transform": "rbxts-transformer-keys"
 			},
 			{
