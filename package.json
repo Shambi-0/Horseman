@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/horseman",
-  "version": "1.0.9",
+  "version": "1.1.1-dev",
   "description": "",
   "main": "Output/init.lua",
   "scripts": {
