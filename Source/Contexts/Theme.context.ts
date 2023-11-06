@@ -21,8 +21,8 @@ export const ThemeContext = Roact.createContext({
 	Layout: {
         Background: pColor.Black,
         Foreground: identity<Color3 | undefined>(undefined),
-        Seperator: identity<Color3 | undefined>(undefined),
-        Focus: identity<Color3 | undefined>(undefined)
+        Seperator:  identity<Color3 | undefined>(undefined),
+        Focus:      identity<Color3 | undefined>(undefined)
     },
     Content: {
         ContentA: identity<Color3 | undefined>(undefined),
@@ -31,15 +31,15 @@ export const ThemeContext = Roact.createContext({
         ContentD: identity<Color3 | undefined>(undefined)
     },
     Base: {
-        Default: identity<Color3 | undefined>(undefined),
-        Primary: identity<Color3 | undefined>(undefined),
+        Default:   identity<Color3 | undefined>(undefined),
+        Primary:   identity<Color3 | undefined>(undefined),
         Secondary: identity<Color3 | undefined>(undefined),
-        Success: identity<Color3 | undefined>(undefined),
-        Warning: identity<Color3 | undefined>(undefined),
-        Danger: identity<Color3 | undefined>(undefined)
+        Success:   identity<Color3 | undefined>(undefined),
+        Warning:   identity<Color3 | undefined>(undefined),
+        Danger:    identity<Color3 | undefined>(undefined)
     },
     Default: {
-        Default50: identity<Color3 | undefined>(undefined),
+        Default50:  identity<Color3 | undefined>(undefined),
         Default100: identity<Color3 | undefined>(undefined),
         Default200: identity<Color3 | undefined>(undefined),
         Default300: identity<Color3 | undefined>(undefined),
@@ -52,7 +52,7 @@ export const ThemeContext = Roact.createContext({
     },
     
     Primary: {
-        Primary50: identity<Color3 | undefined>(undefined),
+        Primary50:  identity<Color3 | undefined>(undefined),
         Primary100: identity<Color3 | undefined>(undefined),
         Primary200: identity<Color3 | undefined>(undefined),
         Primary300: identity<Color3 | undefined>(undefined),
@@ -64,7 +64,7 @@ export const ThemeContext = Roact.createContext({
         Primary900: identity<Color3 | undefined>(undefined)
     },
     Secondary: {
-        Secondary50: identity<Color3 | undefined>(undefined),
+        Secondary50:  identity<Color3 | undefined>(undefined),
         Secondary100: identity<Color3 | undefined>(undefined),
         Secondary200: identity<Color3 | undefined>(undefined),
         Secondary300: identity<Color3 | undefined>(undefined),
@@ -76,7 +76,7 @@ export const ThemeContext = Roact.createContext({
         Secondary900: identity<Color3 | undefined>(undefined)
     },
     Success: {
-        Success50: identity<Color3 | undefined>(undefined),
+        Success50:  identity<Color3 | undefined>(undefined),
         Success100: identity<Color3 | undefined>(undefined),
         Success200: identity<Color3 | undefined>(undefined),
         Success300: identity<Color3 | undefined>(undefined),
@@ -88,7 +88,7 @@ export const ThemeContext = Roact.createContext({
         Success900: identity<Color3 | undefined>(undefined)
     },
     Warning: {
-        Warning50: identity<Color3 | undefined>(undefined),
+        Warning50:  identity<Color3 | undefined>(undefined),
         Warning100: identity<Color3 | undefined>(undefined),
         Warning200: identity<Color3 | undefined>(undefined),
         Warning300: identity<Color3 | undefined>(undefined),
@@ -100,7 +100,7 @@ export const ThemeContext = Roact.createContext({
         Warning900: identity<Color3 | undefined>(undefined)
     },
     Danger: {
-        Danger50: identity<Color3 | undefined>(undefined),
+        Danger50:  identity<Color3 | undefined>(undefined),
         Danger100: identity<Color3 | undefined>(undefined),
         Danger200: identity<Color3 | undefined>(undefined),
         Danger300: identity<Color3 | undefined>(undefined),

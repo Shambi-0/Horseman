@@ -24,7 +24,7 @@ export const Provider = withHooks<Properties>(Configuration => {
 
     return (
         <StoryContext.Provider value={SourceContext} >
-            {Properties[Roact.Children]}
+            { Properties[Roact.Children] }
         </StoryContext.Provider>
     );
 });

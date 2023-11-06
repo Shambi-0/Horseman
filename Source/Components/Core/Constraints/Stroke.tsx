@@ -1,7 +1,8 @@
-import { getBindingValue } from "@rbxts/pretty-roact-hooks";
 import Roact from "@rbxts/roact";
 
+import { getBindingValue } from "@rbxts/pretty-roact-hooks";
 import { useMemo, withHooks } from "@rbxts/roact-hooked";
+
 import { useRem } from "../../../Utility/Hooks";
 
 interface Properties {

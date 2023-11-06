@@ -1,20 +1,18 @@
 import Roact from "@rbxts/roact";
 
 import { getBindingValue, toBinding } from "@rbxts/pretty-roact-hooks";
-import { pAnchor, pColor } from "@rbxts/precomputed";
 import { useMemo, withHooks } from "@rbxts/roact-hooked";
+import { pAnchor, pColor } from "@rbxts/precomputed";
 
-import { Frame } from "../../Core/Components/Frame";
+import { Frame } from "../Core/Components/Frame";
 
 interface Properties {
-    BackgroundTransparency: number;
-    BackgroundColor3: Color3;
-    Thickness: number;
-    From: Vector2;
-    To: Vector2;
+    From: Vector2,
+    To: Vector2,
+    Thickness: number,
 };
 
-export const Line = withHooks<Bindable<Properties, Instance>>(Properties => {
+export const Line = withHooks<Bindable<Properties, Frame>>(Properties => {
     const Data: {
         Distance: number,
         Rotation: number,
@@ -42,7 +40,7 @@ export const Line = withHooks<Bindable<Properties, Instance>>(Properties => {
     );
 }, {
     "defaultProps": {
-        "BackgroundColor3": pColor.Black,
-        "Thickness": 4
+        BackgroundColor3: pColor.White,
+        Thickness: 4
     }
-});
+})

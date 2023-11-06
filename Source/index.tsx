@@ -14,4 +14,4 @@ export const Horseman = withHooks(Properties => {
             </RemProvider.Provider>
         </ThemeProvider.Provider>
     );
-})
+});

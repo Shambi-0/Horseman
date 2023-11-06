@@ -1,8 +1,8 @@
 import Roact from "@rbxts/roact";
 
-import { useMemo, withHooks } from "@rbxts/roact-hooked";
-import { pAnchor, pPoint, pSize } from "@rbxts/precomputed";
+import { pAnchor, pColor, pPoint, pSize } from "@rbxts/precomputed";
 import { getBindingValue } from "@rbxts/pretty-roact-hooks";
+import { withHooks } from "@rbxts/roact-hooked";
 
 interface Properties {
     Transparent: boolean;
@@ -25,6 +25,7 @@ export const Frame = withHooks<Bindable<Properties, Frame>>(Properties => {
 }, {
     "defaultProps": {
         Size: pSize.Full,
-        BorderSizePixel: 0
+        BorderSizePixel: 0,
+        BackgroundColor3: pColor.White
     }
 });

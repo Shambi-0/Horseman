@@ -4,33 +4,29 @@ import { toBinding } from "@rbxts/pretty-roact-hooks";
 import { pAnchor, pColor } from "@rbxts/precomputed";
 import { withHooks } from "@rbxts/roact-hooked";
 
-import { Frame } from "../../Core/Components/Frame";
-
-import { Corner } from "../../Core/Constraints/Corner";
+import { Corner } from "../Core/Constraints/Corner";
+import { Frame } from "../Core/Components/Frame";
 
 interface Properties {
-    Location: Vector2;
-    Thickness: number;
-    BackgroundColor3: Color3;
-    BackgroundTransparency: number;
+    Thickness: number,
+    Location: Vector2
 };
 
-export const Dot = withHooks<Bindable<Properties, Instance>>(Properties => {
+export const Point = withHooks<Bindable<Properties, Frame>>(Properties => {
     return (
         <Frame
             Position={toBinding(Properties.Location!).map(Value => new UDim2(0.5, Value.X, 0.5, Value.Y))}
             Size={toBinding(Properties.Thickness!).map(Value => UDim2.fromOffset(Value, Value))}
-            AnchorPoint={pAnchor.Center.Center}
-            BackgroundColor3={Properties.BackgroundColor3}
             BackgroundTransparency={Properties.BackgroundTransparency}
+            BackgroundColor3={Properties.BackgroundColor3}
+            AnchorPoint={pAnchor.Center.Center}
         >
             <Corner Radius={1} />
         </Frame>
     );
 }, {
     "defaultProps": {
-        "BackgroundColor3": pColor.Black,
-        "Location": Vector2.zero,
-        "Thickness": 4
+        BackgroundColor3: pColor.White,
+        Thickness: 4
     }
-});
+})
