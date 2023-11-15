@@ -12,6 +12,11 @@ end
 for _k, _v in TS.import(script, script, "Components") or {} do
 	exports[_k] = _v
 end
+--[[
+	*
+	 * @client
+	 
+]]
 local Horseman = withHooks(function(Properties)
 	local _children = {}
 	local _length = #_children
