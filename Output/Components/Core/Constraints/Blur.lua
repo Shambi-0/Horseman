@@ -8,8 +8,12 @@ local useState = _roact_hooked.useState
 local withHooks = _roact_hooked.withHooks
 local _services = TS.import(script, TS.getModule(script, "@rbxts", "services"))
 local Lighting = _services.Lighting
+local RunService = _services.RunService
 local Workspace = _services.Workspace
 local resolveNumber = TS.import(script, script.Parent.Parent.Parent.Parent, "Utility", "Common", "Number").resolveNumber
+local _pretty_roact_hooks = TS.import(script, TS.getModule(script, "@rbxts", "pretty-roact-hooks").out)
+local getBindingValue = _pretty_roact_hooks.getBindingValue
+local useEventListener = _pretty_roact_hooks.useEventListener
 local Camera = Workspace.CurrentCamera
 resolveNumber(function()
 	return Camera:ScreenPointToRay(0, 0).Origin.X
@@ -135,7 +139,7 @@ end
 local Blur = withHooks(function(Properties)
 	local Parts, SetParts = useState({ nil, nil, nil, nil })
 	local Ref = useRef()
-	useMemo(function()
+	useEventListener(RunService.RenderStepped, function()
 		local Obj = Ref:getValue()
 		if Obj == nil then
 			return nil
@@ -149,7 +153,18 @@ local Blur = withHooks(function(Properties)
 		local BL = Vector2.new(TL.X, BR.Y)
 		-- TODO: Add support for frame rotation.
 		SetParts(Neon.DrawQuad(Camera:ScreenPointToRay(TL.X, TL.Y, zIndex).Origin, Camera:ScreenPointToRay(TR.X, TR.Y, zIndex).Origin, Camera:ScreenPointToRay(BL.X, BL.Y, zIndex).Origin, Camera:ScreenPointToRay(BR.X, BR.Y, zIndex).Origin, Parts))
-	end, { Properties, Ref })
+	end)
+	useMemo(function()
+		if Parts[1] == nil then
+			return nil
+		end
+		for _, Part in Parts do
+			Part.Parent = Cache
+			Part.Transparency = getBindingValue(Properties.Transparency)
+			Part.Material = getBindingValue(Properties.Material)
+			Part.Color = getBindingValue(Properties.Color)
+		end
+	end, { Parts, Properties })
 	return Roact.createFragment({
 		Blur = Roact.createElement("Frame", {
 			Position = Properties.Position,
@@ -161,7 +176,9 @@ local Blur = withHooks(function(Properties)
 	})
 end, {
 	defaultProps = {
+		Color = Color3.fromRGB(255, 255, 255),
 		Material = Enum.Material.SmoothPlastic,
+		Transparency = 0.98,
 	},
 })
 return {

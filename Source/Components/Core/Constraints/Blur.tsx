@@ -1,10 +1,10 @@
 import Roact from "@rbxts/roact";
 
 import { useMemo, useRef, useState, withHooks } from "@rbxts/roact-hooked";
-import { Lighting, Workspace } from "@rbxts/services";
+import { Lighting, RunService, Workspace } from "@rbxts/services";
 
 import { resolveNumber } from "../../../Utility/Common/Number";
-import { useComposedRef } from "@rbxts/pretty-roact-hooks";
+import { getBindingValue, useComposedRef, useEventListener } from "@rbxts/pretty-roact-hooks";
 
 const Camera = Workspace.CurrentCamera!;
 
@@ -112,7 +112,7 @@ export const Blur = withHooks<Bindable<Properties, Instance>>(Properties => {
 
     const Ref = useRef<Frame>();
 
-    useMemo(() => {
+    useEventListener(RunService.RenderStepped, () => {
         const Obj = Ref.getValue()!;
         if (Obj === undefined) return;
 
@@ -132,7 +132,19 @@ export const Blur = withHooks<Bindable<Properties, Instance>>(Properties => {
                 Parts
             )
         );
-    }, [ Properties, Ref ]);
+    });
+
+    useMemo(() => {
+        if (Parts[0] === undefined) return;
+
+        for (const Part of Parts) {
+            Part.Parent = Cache;
+            
+            Part.Transparency = getBindingValue(Properties.Transparency)!;
+            Part.Material = getBindingValue(Properties.Material)!;
+            Part.Color = getBindingValue(Properties.Color)!;
+        };
+    }, [ Parts, Properties ]);
 
     return (
         <frame
@@ -146,6 +158,8 @@ export const Blur = withHooks<Bindable<Properties, Instance>>(Properties => {
     );
 }, {
     "defaultProps": {
+        Color: Color3.fromRGB(255, 255, 255),
         Material: Enum.Material.SmoothPlastic,
+        Transparency: 0.98
     }
 });
