@@ -29,109 +29,69 @@ DOF.Parent = Lighting
 DOF.NearIntensity = 1
 DOF.FarIntensity = 0
 DOF.Name = "DOF"
+local Wedge = Instance.new("WedgePart")
+Wedge.Anchored = true
+Wedge.TopSurface = Enum.SurfaceType.Smooth
+Wedge.BottomSurface = Enum.SurfaceType.Smooth
 local Neon = {}
 do
 	local _container = Neon
 	local Depth = 0.2
 	local DrawTriangle = function(v0, v1, v2, p0, p1)
-		local _v0 = v0
-		local _v1 = v1
-		local s0 = (_v0 - _v1).Magnitude
-		local _v1_1 = v1
-		local _v2 = v2
-		local s1 = (_v1_1 - _v2).Magnitude
-		local _v2_1 = v2
-		local _v0_1 = v0
-		local s2 = (_v2_1 - _v0_1).Magnitude
-		local Furthest = math.max(s0, s1, s2)
-		local A
-		local B
-		local C
-		if Furthest == s0 then
-			A, B, C = v0, v1, v2
-		elseif Furthest == s1 then
-			A, B, C = v1, v2, v0
-		elseif Furthest == s2 then
-			A, B, C = v2, v0, v1
-		end
+		local A = v0
+		local B = v1
+		local C = v2
 		local _b = B
 		local _a = A
-		local _exp = (_b - _a).X
+		local AB = _b - _a
 		local _c = C
 		local _a_1 = A
-		local _exp_1 = _exp * (_c - _a_1).X
-		local _b_1 = B
-		local _a_2 = A
-		local _exp_2 = (_b_1 - _a_2).Y
+		local AC = _c - _a_1
 		local _c_1 = C
-		local _a_3 = A
-		local _exp_3 = _exp_1 + _exp_2 * (_c_1 - _a_3).Y
+		local _b_1 = B
+		local BC = _c_1 - _b_1
+		local ABD = AB:Dot(AB)
+		local ACD = AC:Dot(AC)
+		local BCD = BC:Dot(BC)
+		if (ABD > ACD) and (ABD > BCD) then
+			local T = A
+			A = B
+			B = T
+		elseif (ACD > BCD) and (ACD > ABD) then
+			local T = A
+			A = C
+			C = T
+		end
 		local _b_2 = B
-		local _a_4 = A
-		local _exp_4 = (_b_2 - _a_4).Z
+		local _a_2 = A
+		AB = _b_2 - _a_2
+		local _exp = AB
 		local _c_2 = C
-		local _a_5 = A
-		local _exp_5 = (_exp_3 + _exp_4 * (_c_2 - _a_5).Z)
-		local _a_6 = A
-		local _b_3 = B
-		local Para = _exp_5 / (_a_6 - _b_3).Magnitude
-		local _fn = math
+		local _a_3 = A
+		AC = _c_2 - _a_3
+		local _exp_1 = AC
 		local _c_3 = C
-		local _a_7 = A
-		local Perp = _fn.sqrt(bit32.bxor(bit32.bxor((_c_3 - _a_7).Magnitude, 2 - Para), 2))
-		local _a_8 = A
+		local _b_3 = B
+		BC = _c_3 - _b_3
+		local _ = BC
+		local Right = AC:Cross(AB).Unit
+		local Up = BC:Cross(Right).Unit
+		local Back = BC.Unit
+		local Height = math.abs(AB:Dot(Up))
+		p0 = p0 or Wedge:Clone()
+		p0.Size = Vector3.new(Depth, Height, math.abs(AB:Dot(Back)))
+		local _fn = CFrame
+		local _a_4 = A
 		local _b_4 = B
-		local dif_para = (_a_8 - _b_4).Magnitude - Para
-		local st = CFrame.new(B, A)
-		local za = CFrame.Angles(math.pi / 2, 0, 0)
-		local cf0 = st
-		local Top_Look = (cf0 * za).LookVector
-		local _a_9 = A
-		local _arg0 = CFrame.new(A, B).LookVector * Para
-		local Mid_Point = _a_9 + _arg0
-		local Needed_Look = CFrame.new(Mid_Point, C).LookVector
-		local dot = Top_Look.X * Needed_Look.X + Top_Look.Y * Needed_Look.Y + Top_Look.Z * Needed_Look.Z
-		local ac = CFrame.Angles(0, 0, math.acos(dot))
-		cf0 = cf0 * ac
-		if ((cf0 * za).LookVector - Needed_Look).Magnitude > 0.01 then
-			local _cf0 = cf0
-			local _arg0_1 = CFrame.Angles(0, 0, -2 * math.acos(dot))
-			cf0 = _cf0 * _arg0_1
-		end
-		local _cf0 = cf0
-		local _cFrame = CFrame.new(0, Perp / 2, -(dif_para + Para / 2))
-		cf0 = _cf0 * _cFrame
-		local _arg0_1 = CFrame.Angles(0, math.pi, 0)
-		local _arg0_2 = ac * _arg0_1
-		local cf1 = st * _arg0_2
-		if ((cf1 * za).LookVector - Needed_Look).Magnitude > 0.01 then
-			local _cf1 = cf1
-			local _arg0_3 = CFrame.Angles(0, 0, 2 * math.acos(dot))
-			cf1 = _cf1 * _arg0_3
-		end
-		local _cf1 = cf1
-		local _cFrame_1 = CFrame.new(0, Perp / 2, dif_para / 2)
-		cf1 = _cf1 * _cFrame_1
-		if p0 == nil then
-			p0 = Instance.new("Part")
-			p0.FormFactor = Enum.FormFactor.Custom
-			p0.TopSurface = Enum.SurfaceType.Smooth
-			p0.BottomSurface = Enum.SurfaceType.Smooth
-			p0.Anchored = true
-			p0.CanCollide = false
-			p0.Locked = true
-			local Mesh = Instance.new("SpecialMesh")
-			Mesh.Parent = p0
-			Mesh.MeshType = Enum.MeshType.Wedge
-			Mesh.Name = "Wedge"
-		end
-		p0.Wedge.Scale = Vector3.new(0, Perp / 0.2, Para / 0.2)
-		p0.CFrame = cf0
-		if p1 == nil then
-			p1 = p0:Clone()
-		end
-		p1.Wedge.Scale = Vector3.new(0, Perp / 0.2, dif_para / 0.2)
-		p1.CFrame = cf1
+		p0.CFrame = _fn.fromMatrix((_a_4 + _b_4) / 2, Right, Up, Back)
+		p0.Parent = Cache
+		p1 = p1 or Wedge:Clone()
+		p1.Size = Vector3.new(Depth, Height, math.abs(AC:Dot(Back)))
+		local _fn_1 = CFrame
+		local _a_5 = A
+		local _c_4 = C
+		p1.CFrame = _fn_1.fromMatrix((_a_5 + _c_4) / 2, Right * (-1), Up, Back * (-1))
+		p1.Parent = Cache
 		return p0, p1
 	end
 	_container.DrawTriangle = DrawTriangle
@@ -158,7 +118,7 @@ local Blur = withHooks(function(Properties)
 		local TR = Vector2.new(BR.X, TL.Y)
 		local BL = Vector2.new(TL.X, BR.Y)
 		-- TODO: Add support for frame rotation.
-		SetParts(Neon.DrawQuad(Camera:ScreenPointToRay(TL.X + 16, TL.Y + 16, zIndex).Origin, Camera:ScreenPointToRay(TR.X - 16, TR.Y + 16, zIndex).Origin, Camera:ScreenPointToRay(BL.X + 16, BL.Y - 16, zIndex).Origin, Camera:ScreenPointToRay(BR.X - 16, BR.Y - 16, zIndex).Origin, Parts))
+		SetParts(Neon.DrawQuad(Camera:ScreenPointToRay(TL.X + 64, TL.Y + 46, zIndex).Origin, Camera:ScreenPointToRay(TR.X - 64, TR.Y + 46, zIndex).Origin, Camera:ScreenPointToRay(BL.X + 64, BL.Y - 46, zIndex).Origin, Camera:ScreenPointToRay(BR.X - 64, BR.Y - 46, zIndex).Origin, Parts))
 	end)
 	useMemo(function()
 		if Parts[1] == nil then

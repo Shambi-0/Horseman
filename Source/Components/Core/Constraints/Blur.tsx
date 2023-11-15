@@ -32,81 +32,44 @@ Wedge.TopSurface = Enum.SurfaceType.Smooth;
 Wedge.BottomSurface = Enum.SurfaceType.Smooth;
 
 namespace Neon {
-    export type TrianglePart = Part & { Wedge: SpecialMesh };
-    export type NeonParts = [ undefined, undefined, undefined, undefined ] | [ TrianglePart, TrianglePart, TrianglePart, TrianglePart ];
+    export type NeonParts = [ undefined, undefined, undefined, undefined ] | [ WedgePart, WedgePart, WedgePart, WedgePart ];
 
     const Depth = 0.2;
 
-    export const DrawTriangle = (v0: Vector3, v1: Vector3, v2: Vector3, p0?: TrianglePart, p1?: TrianglePart): LuaTuple<[ TrianglePart, TrianglePart ]> => {
-        const s0 = v0.sub(v1).Magnitude, s1 = v1.sub(v2).Magnitude, s2 = v2.sub(v0).Magnitude, Furthest = math.max(s0, s1, s2);
-
-        let A!: Vector3, B!: Vector3, C!: Vector3;
+    export const DrawTriangle = (v0: Vector3, v1: Vector3, v2: Vector3, p0?: WedgePart, p1?: WedgePart): LuaTuple<[ WedgePart, WedgePart ]> => {
+        let A = v0, B = v1, C = v2;
         
-        if (Furthest === s0) {
-            [ A, B, C ] = [ v0, v1, v2 ];
+        let AB = B.sub(A), AC = C.sub(A), BC = C.sub(B);
+        const ABD = AB.Dot(AB), ACD = AC.Dot(AC), BCD = BC.Dot(BC);
 
-        } else if (Furthest === s1) {
-            [ A, B, C ] = [ v1, v2, v0 ];
+        if ((ABD > ACD) && (ABD > BCD)) {
+            const T = A; A = B; B = T;
 
-        } else if (Furthest === s2) {
-            [ A, B, C ] = [ v2, v0, v1 ];
+        } else if ((ACD > BCD) && (ACD > ABD)) {
+            const T = A; A = C; C = T;
         };
 
-        const Para = (B.sub(A).X * C.sub(A).X + B.sub(A).Y * C.sub(A).Y + B.sub(A).Z * C.sub(A).Z) / A.sub(B).Magnitude;
-        const Perp = math.sqrt(C.sub(A).Magnitude ^ 2 - Para ^ 2);
-        const dif_para = A.sub(B).Magnitude - Para;
+        AB = B.sub(A), AC = C.sub(A), BC = C.sub(B);
 
-        const st = new CFrame(B, A);
-        const za = CFrame.Angles(math.pi / 2, 0, 0);
+        const Right = AC.Cross(AB).Unit;
+        const Up = BC.Cross(Right).Unit;
+        const Back = BC.Unit
 
-        let cf0 = st;
+        const Height = math.abs(AB.Dot(Up));
 
-        const Top_Look = cf0.mul(za).LookVector
-		const Mid_Point = A.add(new CFrame(A, B).LookVector.mul(Para))
-		const Needed_Look = new CFrame(Mid_Point, C).LookVector
-		const dot = Top_Look.X * Needed_Look.X + Top_Look.Y * Needed_Look.Y + Top_Look.Z * Needed_Look.Z
+        p0 = p0 || Wedge.Clone();
 
-		const ac = CFrame.Angles(0, 0, math.acos(dot))
+        p0.Size = new Vector3(Depth, Height, math.abs(AB.Dot(Back)));
+        p0.CFrame = CFrame.fromMatrix(A.add(B).div(2), Right, Up, Back);
+        p0.Parent = Cache;
 
-		cf0 = cf0.mul(ac);
+        p1 = p1 || Wedge.Clone();
 
-		if (cf0.mul(za).LookVector.sub(Needed_Look).Magnitude > 0.01) {
-			cf0 = cf0.mul(CFrame.Angles(0, 0, -2 * math.acos(dot)))
-        };
+        p1.Size = new Vector3(Depth, Height, math.abs(AC.Dot(Back)));
+        p1.CFrame = CFrame.fromMatrix(A.add(C).div(2), Right.mul(-1), Up, Back.mul(-1));
+        p1.Parent = Cache;
 
-		cf0 = cf0.mul(new CFrame(0, Perp / 2, -(dif_para + Para / 2)));
-
-		let cf1 = st.mul(ac.mul(CFrame.Angles(0, math.pi, 0)));
-
-		if (cf1.mul(za).LookVector.sub(Needed_Look).Magnitude > 0.01) {
-			cf1 = cf1.mul(CFrame.Angles(0, 0, 2 * math.acos(dot)))
-        };
-
-		cf1 = cf1.mul(new CFrame(0, Perp / 2, dif_para / 2));
-
-        if (p0 === undefined) {
-            p0 = new Instance("Part") as TrianglePart;
-            p0.FormFactor = Enum.FormFactor.Custom;
-            p0.TopSurface = Enum.SurfaceType.Smooth;
-            p0.BottomSurface = Enum.SurfaceType.Smooth;
-            p0.Anchored = true;
-            p0.CanCollide = false;
-            p0.Locked = true;
-
-            const Mesh = new Instance("SpecialMesh");
-            Mesh.Parent = p0;
-            Mesh.MeshType = Enum.MeshType.Wedge;
-            Mesh.Name = "Wedge";
-        };
-
-        p0.Wedge.Scale = new Vector3(0, Perp / 0.2, Para / 0.2);
-        p0.CFrame = cf0;
-
-        if (p1 === undefined) p1 = p0.Clone();
-        p1.Wedge.Scale = new Vector3(0, Perp / 0.2, dif_para / 0.2);
-        p1.CFrame = cf1;
-
-        return $tuple(p0, p1);
+        return $tuple(p0, p1 );
     };
 
     export const DrawQuad = (v0: Vector3, v1: Vector3, v2: Vector3, v3: Vector3, Parts: NeonParts): NeonParts => {
@@ -144,10 +107,10 @@ export const Blur = withHooks<Bindable<Properties, Instance>>(Properties => {
 
         SetParts(
             Neon.DrawQuad(
-                Camera.ScreenPointToRay(TL.X + 16, TL.Y + 16, zIndex).Origin,
-                Camera.ScreenPointToRay(TR.X - 16, TR.Y + 16, zIndex).Origin,
-                Camera.ScreenPointToRay(BL.X + 16, BL.Y - 16, zIndex).Origin,
-                Camera.ScreenPointToRay(BR.X - 16, BR.Y - 16, zIndex).Origin,
+                Camera.ScreenPointToRay(TL.X + 64, TL.Y + 46, zIndex).Origin,
+                Camera.ScreenPointToRay(TR.X - 64, TR.Y + 46, zIndex).Origin,
+                Camera.ScreenPointToRay(BL.X + 64, BL.Y - 46, zIndex).Origin,
+                Camera.ScreenPointToRay(BR.X - 64, BR.Y - 46, zIndex).Origin,
                 Parts
             )
         );
