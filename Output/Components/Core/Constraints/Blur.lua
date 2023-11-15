@@ -14,6 +14,7 @@ local resolveNumber = TS.import(script, script.Parent.Parent.Parent.Parent, "Uti
 local _pretty_roact_hooks = TS.import(script, TS.getModule(script, "@rbxts", "pretty-roact-hooks").out)
 local getBindingValue = _pretty_roact_hooks.getBindingValue
 local useEventListener = _pretty_roact_hooks.useEventListener
+local pSize = TS.import(script, TS.getModule(script, "@rbxts", "precomputed").out).pSize
 local Camera = Workspace.CurrentCamera
 resolveNumber(function()
 	return Camera:ScreenPointToRay(0, 0).Origin.X
@@ -46,66 +47,71 @@ do
 		local A
 		local B
 		local C
-		repeat
-			if Furthest == s0 then
-				A, B, C = v0, v1, v2
-				break
-			end
-			if Furthest == s1 then
-				A, B, C = v1, v2, v0
-				break
-			end
-			if Furthest == s2 then
-				A, B, C = v2, v0, v1
-				break
-			end
-			break
-		until true
+		if Furthest == s0 then
+			A, B, C = v0, v1, v2
+		elseif Furthest == s1 then
+			A, B, C = v1, v2, v0
+		elseif Furthest == s2 then
+			A, B, C = v2, v0, v1
+		end
 		local _b = B
 		local _a = A
-		local c0 = _b - _a
+		local _exp = (_b - _a).X
 		local _c = C
 		local _a_1 = A
-		local c1 = _c - _a_1
-		local _a_2 = A
+		local _exp_1 = _exp * (_c - _a_1).X
 		local _b_1 = B
-		local c2 = _a_2 - _b_1
-		local Parameter = ((c0.X * c1.X) + (c0.Y * c1.Y) + (c0.Z * c1.Z)) / c2.Magnitude
-		local Perspective = math.sqrt(math.pow(c1.Magnitude, 2) - (Parameter * Parameter))
-		local Difference = c2.Magnitude - Parameter
-		local Reach = Perspective / Depth
-		local Stare = CFrame.new(B, A)
-		local Angle = CFrame.Angles(math.pi / 2, 0, 0)
-		local From = Stare
-		local To
-		local Top = (From * Angle).LookVector
+		local _a_2 = A
+		local _exp_2 = (_b_1 - _a_2).Y
+		local _c_1 = C
 		local _a_3 = A
-		local _arg0 = CFrame.new(A, B).LookVector * Parameter
-		local Middle = _a_3 + _arg0
-		local Goal = CFrame.new(Middle, C).LookVector
-		local Dot = (Top.X * Goal.X) + (Top.Y * Goal.Y) + (Top.Z * Goal.Z)
-		local Curve = math.acos(Dot)
-		local Arc = CFrame.Angles(0, 0, Curve)
-		From = From * Arc
-		if ((From * Angle).LookVector - Goal).Magnitude > 0.01 then
-			local _from = From
-			local _arg0_1 = CFrame.Angles(0, 0, -2 * Curve)
-			From = _from * _arg0_1
+		local _exp_3 = _exp_1 + _exp_2 * (_c_1 - _a_3).Y
+		local _b_2 = B
+		local _a_4 = A
+		local _exp_4 = (_b_2 - _a_4).Z
+		local _c_2 = C
+		local _a_5 = A
+		local _exp_5 = (_exp_3 + _exp_4 * (_c_2 - _a_5).Z)
+		local _a_6 = A
+		local _b_3 = B
+		local Para = _exp_5 / (_a_6 - _b_3).Magnitude
+		local _fn = math
+		local _c_3 = C
+		local _a_7 = A
+		local Perp = _fn.sqrt(bit32.bxor(bit32.bxor((_c_3 - _a_7).Magnitude, 2 - Para), 2))
+		local _a_8 = A
+		local _b_4 = B
+		local dif_para = (_a_8 - _b_4).Magnitude - Para
+		local st = CFrame.new(B, A)
+		local za = CFrame.Angles(math.pi / 2, 0, 0)
+		local cf0 = st
+		local Top_Look = (cf0 * za).LookVector
+		local _a_9 = A
+		local _arg0 = CFrame.new(A, B).LookVector * Para
+		local Mid_Point = _a_9 + _arg0
+		local Needed_Look = CFrame.new(Mid_Point, C).LookVector
+		local dot = Top_Look.X * Needed_Look.X + Top_Look.Y * Needed_Look.Y + Top_Look.Z * Needed_Look.Z
+		local ac = CFrame.Angles(0, 0, math.acos(dot))
+		cf0 = cf0 * ac
+		if ((cf0 * za).LookVector - Needed_Look).Magnitude > 0.01 then
+			local _cf0 = cf0
+			local _arg0_1 = CFrame.Angles(0, 0, -2 * math.acos(dot))
+			cf0 = _cf0 * _arg0_1
 		end
-		local _from = From
-		local _cFrame = CFrame.new(0, Perspective / 2, -(Difference + (Parameter / 2)))
-		From = _from * _cFrame
+		local _cf0 = cf0
+		local _cFrame = CFrame.new(0, Perp / 2, -(dif_para + Para / 2))
+		cf0 = _cf0 * _cFrame
 		local _arg0_1 = CFrame.Angles(0, math.pi, 0)
-		local _arg0_2 = Arc * _arg0_1
-		To = Stare * _arg0_2
-		if ((To * Angle).LookVector - Goal).Magnitude > 0.01 then
-			local _to = To
-			local _arg0_3 = CFrame.Angles(0, 0, 2 * math.acos(Dot))
-			To = _to * _arg0_3
+		local _arg0_2 = ac * _arg0_1
+		local cf1 = st * _arg0_2
+		if ((cf1 * za).LookVector - Needed_Look).Magnitude > 0.01 then
+			local _cf1 = cf1
+			local _arg0_3 = CFrame.Angles(0, 0, 2 * math.acos(dot))
+			cf1 = _cf1 * _arg0_3
 		end
-		local _to = To
-		local _cFrame_1 = CFrame.new(0, Perspective / 2, Difference / 2)
-		To = _to * _cFrame_1
+		local _cf1 = cf1
+		local _cFrame_1 = CFrame.new(0, Perp / 2, dif_para / 2)
+		cf1 = _cf1 * _cFrame_1
 		if p0 == nil then
 			p0 = Instance.new("Part")
 			p0.FormFactor = Enum.FormFactor.Custom
@@ -119,13 +125,13 @@ do
 			Mesh.MeshType = Enum.MeshType.Wedge
 			Mesh.Name = "Wedge"
 		end
-		p0.Wedge.Scale = Vector3.new(0, Reach, Reach)
-		p0.CFrame = From
+		p0.Wedge.Scale = Vector3.new(0, Perp / 0.2, Para / 0.2)
+		p0.CFrame = cf0
 		if p1 == nil then
 			p1 = p0:Clone()
 		end
-		p1.Wedge.Scale = Vector3.new(0, Reach, Difference / 0.2)
-		p1.CFrame = To
+		p1.Wedge.Scale = Vector3.new(0, Perp / 0.2, dif_para / 0.2)
+		p1.CFrame = cf1
 		return p0, p1
 	end
 	_container.DrawTriangle = DrawTriangle
@@ -152,7 +158,7 @@ local Blur = withHooks(function(Properties)
 		local TR = Vector2.new(BR.X, TL.Y)
 		local BL = Vector2.new(TL.X, BR.Y)
 		-- TODO: Add support for frame rotation.
-		SetParts(Neon.DrawQuad(Camera:ScreenPointToRay(TL.X, TL.Y, zIndex).Origin, Camera:ScreenPointToRay(TR.X, TR.Y, zIndex).Origin, Camera:ScreenPointToRay(BL.X, BL.Y, zIndex).Origin, Camera:ScreenPointToRay(BR.X, BR.Y, zIndex).Origin, Parts))
+		SetParts(Neon.DrawQuad(Camera:ScreenPointToRay(TL.X + 16, TL.Y + 16, zIndex).Origin, Camera:ScreenPointToRay(TR.X - 16, TR.Y + 16, zIndex).Origin, Camera:ScreenPointToRay(BL.X + 16, BL.Y - 16, zIndex).Origin, Camera:ScreenPointToRay(BR.X - 16, BR.Y - 16, zIndex).Origin, Parts))
 	end)
 	useMemo(function()
 		if Parts[1] == nil then
@@ -177,8 +183,9 @@ local Blur = withHooks(function(Properties)
 end, {
 	defaultProps = {
 		Color = Color3.fromRGB(255, 255, 255),
-		Material = Enum.Material.SmoothPlastic,
+		Material = Enum.Material.Glass,
 		Transparency = 0.98,
+		Size = pSize.Full,
 	},
 })
 return {
